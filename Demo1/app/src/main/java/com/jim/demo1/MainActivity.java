@@ -22,7 +22,6 @@ public class MainActivity extends Activity {
         addListenerOnButtonSearch();
         addListenerOnButtonMatches();
         addListenerOnButtonPost();
-        addListenerOnButtonSettings();
     }
 
 
@@ -109,26 +108,8 @@ public class MainActivity extends Activity {
 
     }
 
-    public void addListenerOnButtonSettings() {
-
-        final Context context = this;
-
-        button = (ImageButton) findViewById(R.id.settingsButton);
-
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                Intent intent = new Intent(context, settings_activity.class);
-                startActivity(intent);
-
-            }
-
-        });
 
     }
 
 
 
-}

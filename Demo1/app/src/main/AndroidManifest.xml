@@ -32,10 +32,7 @@
             android:label="@string/MatchButton"
             android:name=".matches_activity" >
         </activity>
-        <activity
-            android:label="@string/SettingsButton"
-            android:name=".settings_activity" >
-        </activity>
+
     </application>
 
 </manifest>

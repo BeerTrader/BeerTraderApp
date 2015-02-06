@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,4 +14,60 @@
         android:text="Search Page"
         android:id="@+id/searchPage"
         android:layout_gravity="center_horizontal" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:id="@+id/multiAutoCompleteTextView"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_weight="0.17" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Brewery"
+        android:id="@+id/multiAutoCompleteTextView"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_weight="0.17" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Beer Name"
+        android:id="@+id/multiAutoCompleteTextView"
+        android:layout_weight="0.17" />
+
+    <MultiAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance"
+        android:id="@+id/multiAutoCompleteTextView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.17" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/find" />
+
+    <!--<MultiAutoCompleteTextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="New MultiAutoCompleteTextView"-->
+        <!--android:id="@+id/multiAutoCompleteTextView"-->
+        <!--android:layout_gravity="center_horizontal" />-->
+
+    <!--<MultiAutoCompleteTextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="New MultiAutoCompleteTextView"-->
+        <!--android:id="@+id/multiAutoCompleteTextView"-->
+        <!--android:layout_gravity="center_horizontal" />-->
+
+
 </LinearLayout>
