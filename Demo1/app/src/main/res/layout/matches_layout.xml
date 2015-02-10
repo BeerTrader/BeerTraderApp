@@ -3,7 +3,8 @@
     android:id="@+id/matches_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
 
     <TextView
         android:id="@+id/matches_page"
@@ -14,4 +15,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

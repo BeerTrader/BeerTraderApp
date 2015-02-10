@@ -5,34 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#ffffffff">
 
-
-    <TextView
-        android:id="@+id/profile_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile Page"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_marginTop="55dp"
+        android:id="@+id/userPicture"
+        android:layout_marginTop="42dp"
         android:src="@drawable/user_male"
-        android:layout_below="@+id/profile_page"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/imageView"
+        android:text="@string/profileName"
+        android:id="@+id/userName"
+        android:layout_below="@+id/userPicture"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="App Settings"
+        android:id="@+id/profileAppSettingsButton"
+        android:layout_below="@+id/userName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact BeerTrader"
+        android:id="@+id/profileContactButton"
+        android:layout_below="@+id/profileAppSettingsButton"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Share BeerTrader"
+        android:id="@+id/profileShareButton"
+        android:layout_below="@+id/profileContactButton"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

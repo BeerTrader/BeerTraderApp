@@ -8,7 +8,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
     android:focusableInTouchMode="false"
-    android:id="@+id/Home">
+    android:id="@+id/Home"
+    android:background="@android:color/white">
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -55,7 +56,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Profile &amp; Settings"
-        android:id="@+id/textView7"
+        android:id="@+id/profileText"
         android:layout_below="@+id/profileButton"
         android:layout_centerHorizontal="true" />
 
@@ -64,7 +65,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Search"
-        android:id="@+id/textView7"
+        android:id="@+id/searchText"
         android:layout_below="@+id/searchButton"
         android:layout_toStartOf="@+id/textView7" />
 
@@ -73,7 +74,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Post Beer"
-        android:id="@+id/textView7"
+        android:id="@+id/postText"
         android:layout_below="@+id/postButton"
         android:layout_alignParentEnd="true" />
 
@@ -82,7 +83,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Matches"
-        android:id="@+id/textView7"
+        android:id="@+id/matchText"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
