@@ -26,6 +26,7 @@ public class search_activity extends Activity {
         setContentView(R.layout.search_layout);
 
         final AutoCompleteTextView beerType = (AutoCompleteTextView) findViewById(R.id.AutoCompleteTextViewType);
+        final AutoCompleteTextView brewery = (AutoCompleteTextView) findViewById(R.id.AutoCompleteTextViewBrewery);
 
 
         //Once the next button is hit on the item keyboard hide the keyboard, jump to the set price function, then move focus to the quantity text field
@@ -38,7 +39,7 @@ public class search_activity extends Activity {
                                     getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(beerType.getWindowToken(), 0);
                             handled = true;
-                            //request focus of next item
+                            brewery.requestFocus();
                         }
                         return handled;
                     }
