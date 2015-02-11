@@ -16,11 +16,11 @@
         android:id="@+id/searchPage"
         android:layout_gravity="center_horizontal" />
 
-    <MultiAutoCompleteTextView
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:id="@+id/multiAutoCompleteTextViewType"
+        android:hint="Type"
+        android:id="@+id/AutoCompleteTextViewType"
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:layout_weight="0.17" />
