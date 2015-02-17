@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 
 public class MainActivity extends Activity {
 
-    ImageButton button;
+    Button button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
 
         final Context context = this;
 
-        button = (ImageButton) findViewById(R.id.profileButton);
+        button = (Button) findViewById(R.id.profileButton);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
 
         final Context context = this;
 
-        button = (ImageButton) findViewById(R.id.searchButton);
+        button = (Button) findViewById(R.id.searchButton);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -72,7 +73,7 @@ public class MainActivity extends Activity {
 
         final Context context = this;
 
-        button = (ImageButton) findViewById(R.id.postButton);
+        button = (Button) findViewById(R.id.postButton);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -92,7 +93,7 @@ public class MainActivity extends Activity {
 
         final Context context = this;
 
-        button = (ImageButton) findViewById(R.id.matchesButton);
+        button = (Button) findViewById(R.id.matchesButton);
 
         button.setOnClickListener(new View.OnClickListener() {
 

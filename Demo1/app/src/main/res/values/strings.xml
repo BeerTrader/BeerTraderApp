@@ -7,8 +7,6 @@
     <string name="SearchButton">Search</string>
     <string name="PostButton">Post Beer</string>
     <string name="MatchButton">Matches</string>
-    <string name="profileText">ProfileSettingsText</string>
-    <string name="searchText">SearchText</string>
     <string name="postText">PostText</string>
     <string name="matchText">MatchText</string>
     <string name="profileName">Joe Schmoe</string>
