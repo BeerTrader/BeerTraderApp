@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/user_male" />
+        android:src="@drawable/duff" />
 
     <Button
         android:layout_width="fill_parent"

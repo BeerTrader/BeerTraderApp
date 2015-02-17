@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/phonemug"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -32,7 +32,14 @@
             android:label="@string/MatchButton"
             android:name=".matches_activity" >
         </activity>
-
+        <activity
+            android:label="@string/profile_app_settings_button"
+            android:name=".app_settings_activity" >
+        </activity>
+        <activity
+            android:label="@string/contact_text"
+            android:name=".contact_activity" >
+        </activity>
     </application>
 
 </manifest>

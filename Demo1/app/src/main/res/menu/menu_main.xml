@@ -3,6 +3,7 @@
     tools:context=".MainActivity">
     <item android:id="@+id/action_settings"
         android:title="@string/app_name"
+        android:icon="@drawable/phonemug"
         android:orderInCategory="100"
         android:showAsAction="never"
         />

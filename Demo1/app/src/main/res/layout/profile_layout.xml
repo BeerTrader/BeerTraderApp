@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/userPicture"
         android:layout_marginTop="42dp"
-        android:src="@drawable/user_male"
+        android:src="@drawable/duff"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="App Settings"
+        android:text="@string/profile_app_settings_button"
         android:id="@+id/profileAppSettingsButton"
         android:layout_below="@+id/userName"
         android:layout_alignParentStart="true"
@@ -39,7 +39,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Contact BeerTrader"
+        android:text="@string/contact_text"
         android:id="@+id/profileContactButton"
         android:layout_below="@+id/profileAppSettingsButton"
         android:layout_alignParentStart="true" />
