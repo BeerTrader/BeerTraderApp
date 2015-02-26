@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -135,7 +138,7 @@ public class MainActivity extends Activity {
 
     public void postServer() {
 
-        Map<String, String> jsonParams = new HashMap<>();
+        /*Map<String, String> jsonParams = new HashMap<>();
         jsonParams.put("username", "test6");
         jsonParams.put("password", "test");
         String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
@@ -164,10 +167,10 @@ public class MainActivity extends Activity {
                 return headers;
             }
         };
-        queue.add(request);
+        queue.add(request);*/
 
-        /*String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
+        RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -195,7 +198,7 @@ public class MainActivity extends Activity {
                 return headers;
             }
         };
-        queue.add(sr);*/
+        queue.add(sr);
     }
 
 
