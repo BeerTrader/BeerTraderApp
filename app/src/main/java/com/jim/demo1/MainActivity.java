@@ -138,37 +138,6 @@ public class MainActivity extends Activity {
 
     public void postServer() {
 
-        /*Map<String, String> jsonParams = new HashMap<>();
-        jsonParams.put("username", "test6");
-        jsonParams.put("password", "test");
-        String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
-                url,
-                new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response", response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", error.toString());
-                    }
-                }
-         ) {
-            @Override
-            public Map<String, String> getHeaders()
-            {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
-        queue.add(request);*/
-
         String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
