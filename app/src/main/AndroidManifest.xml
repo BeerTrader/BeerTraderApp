@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jim.demo1" >
 
+<uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/phonemug"
@@ -17,29 +19,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/ProfileButton"
-            android:name=".profile_activity" >
+            android:name=".profile_activity"
+            android:label="@string/ProfileButton" >
         </activity>
         <activity
-            android:label="@string/SearchButton"
-            android:name=".search_activity" >
+            android:name=".search_activity"
+            android:label="@string/SearchButton" >
         </activity>
         <activity
-            android:label="@string/PostButton"
-            android:name=".post_activity" >
+            android:name=".post_activity"
+            android:label="@string/PostButton" >
         </activity>
         <activity
-            android:label="@string/MatchButton"
-            android:name=".matches_activity" >
+            android:name=".matches_activity"
+            android:label="@string/MatchButton" >
         </activity>
         <activity
-            android:label="@string/profile_app_settings_button"
-            android:name=".app_settings_activity" >
+            android:name=".app_settings_activity"
+            android:label="@string/profile_app_settings_button" >
         </activity>
         <activity
-            android:label="@string/contact_text"
-            android:name=".contact_activity" >
+            android:name=".contact_activity"
+            android:label="@string/contact_text" >
+        </activity>
+        <activity
+            android:name=".CreateUser"
+            android:label="@string/title_activity_create_user" >
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

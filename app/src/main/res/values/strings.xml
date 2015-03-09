@@ -10,9 +10,14 @@
     <string name="postText">PostText</string>
     <string name="matchText">MatchText</string>
     <string name="profileName">Barry Duffman</string>
-    <string name="testPOST">POST LOGIN TEST</string>
+    <string name="createUser">CREATE NEW USER</string>
     <string name="app_settings_title_text">NOTIFICATIONS</string>
     <string name="profile_app_settings_button">App Settings</string>
     <string name="contact_text">Contact BeerTrader</string>
+    <string name="submit">SUBMIT</string>
+    <string name="title_activity_create_user">CreateUser</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

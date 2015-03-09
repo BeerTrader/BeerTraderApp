@@ -121,55 +121,23 @@ public class MainActivity extends Activity {
 
     public void addListenerOnButtonPostTest() {
 
-        button = (Button) findViewById(R.id.testPOST);
+        final Context context = this;
+
+        button = (Button) findViewById(R.id.createUser);
 
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                Truster t = new Truster();
-                t.run();
-                postServer();
+
+                Intent intent = new Intent(context, CreateUser.class);
+                startActivity(intent);
+
             }
 
         });
 
     }
-
-    public void postServer() {
-
-        String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest sr = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", error.toString());
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("username","test6");
-                params.put("password","test");
-
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
-        queue.add(sr);
-    }
-
 
     }
 
