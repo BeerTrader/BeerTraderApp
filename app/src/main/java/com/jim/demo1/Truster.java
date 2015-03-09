@@ -1,45 +1,50 @@
 package com.jim.demo1;
 
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+import java.security.KeyStore;
 
 public class Truster {
 
-    public void run() {
-        SSLContext ctx = null;
-        try {
-            ctx = SSLContext.getInstance("TLS");
-        }catch (NoSuchAlgorithmException e) {e.printStackTrace();}
-        try {
-            assert ctx != null;
-            ctx.init(null, new TrustManager[] {
-                    new X509TrustManager() {
-                        public void checkClientTrusted(X509Certificate[] chain, String authType) {}
-                        public void checkServerTrusted(X509Certificate[] chain, String authType) {}
-                        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[]{}; }
-                    }
-            }, null);
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        }
-        HttpsURLConnection.setDefaultSSLSocketFactory(ctx.getSocketFactory());
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
+        /*SSLSocketFactory sf = (SSLSocketFactory) httpClient.getConnectionManager()
+                .getSchemeRegistry().getScheme("https").getSocketFactory();
+        sf.setHostnameVerifier(new AllowAllHostnameVerifier());*/
+
+        public HttpClient getNewHttpClient() {
+            try {
+                KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+                trustStore.load(null, null);
+
+                SSLSocketFactory sf = new MySSLSocketFactory(trustStore);
+                sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+                HttpParams params = new BasicHttpParams();
+                HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+                HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+                SchemeRegistry registry = new SchemeRegistry();
+                registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+                registry.register(new Scheme("https", sf, 443));
+
+                ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+
+                return new DefaultHttpClient(ccm, params);
+            } catch (Exception e) {
+                return new DefaultHttpClient();
             }
-        });
-    }
-
-
-
+        }
 
 }

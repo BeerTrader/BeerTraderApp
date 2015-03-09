@@ -9,7 +9,10 @@ import android.widget.EditText;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -30,8 +33,6 @@ public class CreateUser extends Activity {
         final EditText textPwd = (EditText)findViewById(R.id.loginPwd);
         final Button btn = (Button)findViewById(R.id.submitUser);
         final String url = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
-        Truster t = new Truster();
-        t.run();
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,9 @@ public class CreateUser extends Activity {
                 e.printStackTrace();
             }
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
             HttpPost httpPostReq = new HttpPost(url);
             try{
                 System.out.println(jsonobj.toString());
