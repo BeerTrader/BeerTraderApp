@@ -11,10 +11,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,17 +62,14 @@ public class CreateUser extends Activity {
 
             HttpPost httpPostReq = new HttpPost(url);
             try{
-                System.out.println(jsonobj.toString());
                 StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
                 se.setContentType("application/json; charset=UTF-8");
-                //se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json;charset=UTF-8"));
                 httpPostReq.setEntity(se);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                System.out.println("response got here");
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
