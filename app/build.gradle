@@ -28,9 +28,6 @@ dependencies {
 task writeNewPom << {
     pom {
         project {
-            groupId 'org.example'
-            artifactId 'test'
-            version '1.0.0'
             inceptionYear '2008'
             licenses {
                 license {
