@@ -45,7 +45,7 @@ public class search_activity extends Activity {
                     }
                 });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line, BEERS);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, BEERS);
 
         AutoCompleteTextView itemCurrent = (AutoCompleteTextView) findViewById(R.id.AutoCompleteTextViewType);
 
