@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Jim\.gradle\caches\modules-2\files-2.1\org.codehaus.jackson\jackson-mapper-asl\1.9.13\1ee2f2bed0e5dd29d1cb155a166e6f8d50bbddb7\jackson-mapper-asl-1.9.13.jar"
+        jar="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/exploded-aar/BeerTraderApp.app.libs/volley/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b10c3066fda18b9dd0df8f87b332c3488f2513c5">
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/classes-a89aaf2b16d3c9b8ffa92ff4f9784340b1b3ab7a.jar" />
+    </item>
+    <item
+        jar="/Users/jasekurasz/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-mapper-asl/1.9.13/1ee2f2bed0e5dd29d1cb155a166e6f8d50bbddb7/jackson-mapper-asl-1.9.13.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="1ee2f2bed0e5dd29d1cb155a166e6f8d50bbddb7">
-        <dex dex="C:\Users\Jim\AndroidStudioProjects\BeerTraderApp\app\build\intermediates\pre-dexed\debug\jackson-mapper-asl-1.9.13-6c2238bb04cb749fd15afc41df457dc18400609d.jar" />
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/jackson-mapper-asl-1.9.13-0498cced488e81eba37ad5f65a17abff57345a07.jar" />
     </item>
     <item
-        jar="C:\Users\Jim\.gradle\caches\modules-2\files-2.1\org.codehaus.jackson\jackson-core-asl\1.9.13\3c304d70f42f832e0a86d45bd437f692129299a4\jackson-core-asl-1.9.13.jar"
+        jar="/Users/jasekurasz/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.9.13/3c304d70f42f832e0a86d45bd437f692129299a4/jackson-core-asl-1.9.13.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3c304d70f42f832e0a86d45bd437f692129299a4">
-        <dex dex="C:\Users\Jim\AndroidStudioProjects\BeerTraderApp\app\build\intermediates\pre-dexed\debug\jackson-core-asl-1.9.13-21844a7c42565a9a71a86ef53a5e3802beec66df.jar" />
-    </item>
-    <item
-        jar="C:\Users\Jim\AndroidStudioProjects\BeerTraderApp\app\build\intermediates\exploded-aar\BeerTraderApp.app.libs\volley\unspecified\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a7e6c2dc405fbd6a497ad0e5b5090cfd1e09e3ea">
-        <dex dex="C:\Users\Jim\AndroidStudioProjects\BeerTraderApp\app\build\intermediates\pre-dexed\debug\classes-22815bb1d83d30b37220261356d4298b5d69c88f.jar" />
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/jackson-core-asl-1.9.13-a6fc9e1cb092437a46d6b9759af39525e71cdeb7.jar" />
     </item>
 
 </items>

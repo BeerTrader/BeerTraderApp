@@ -27,6 +27,7 @@ public class CustomAdapter extends BaseAdapter{
         this.activity = activity;
         this.beerList = bList;
     }
+
     @Override
     public int getCount() {
         return beerList.size();
@@ -58,8 +59,8 @@ public class CustomAdapter extends BaseAdapter{
         Beer b = beerList.get(position);
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
-//        mImageLoader = RequestSingleton.getInstance().getImageLoader();
-//        mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
+        //mImageLoader = RequestSingleton.getInstance().getImageLoader();
+        //mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
         return row;
     }
 }
