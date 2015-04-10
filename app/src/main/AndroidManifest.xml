@@ -23,10 +23,6 @@
             android:label="@string/ProfileButton" >
         </activity>
         <activity
-            android:name=".search_activity"
-            android:label="@string/SearchButton" >
-        </activity>
-        <activity
             android:name=".post_activity"
             android:label="@string/PostButton" >
         </activity>

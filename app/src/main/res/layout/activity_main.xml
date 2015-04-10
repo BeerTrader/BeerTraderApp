@@ -21,13 +21,6 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/SearchButton"
-        android:id="@+id/searchButton"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:text="@string/PostButton"
         android:id="@+id/postButton"
         android:layout_gravity="center_horizontal" />

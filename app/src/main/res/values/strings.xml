@@ -4,7 +4,6 @@
     <string name="app_name">BeerTrader</string>
     <!--<string name="action_settings">something here</string>-->
     <string name="ProfileButton">Profile &amp; Settings</string>
-    <string name="SearchButton">Search</string>
     <string name="PostButton">Post Beer</string>
     <string name="MatchButton">Matches</string>
     <string name="postText">PostText</string>
@@ -19,5 +18,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="beerName">beer_name</string>
+    <string name="brewery">breweryName</string>
+    <string name="beerType">beerType</string>
 
 </resources>
