@@ -17,20 +17,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.jim.demo1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fec33c0-8292-4ea1-a038-7875a2feec60" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/jim/demo1/Chat_TEST.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat__test.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_chat__test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/jim/demo1/CustomAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/jim/demo1/CustomAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/beer_list_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/beer_list_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/libs/libs.iml" afterPath="$PROJECT_DIR$/app/libs/libs.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/jim/demo1/post_activity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/jim/demo1/post_activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/volley/volley.iml" afterPath="$PROJECT_DIR$/libs/volley/volley.iml" />
+    <list default="true" id="0fec33c0-8292-4ea1-a038-7875a2feec60" name="Default" comment="Post Beer list is now populating without the image. I am getting an error with the images that the URL is bad">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BeerTraderApp.iws" />
@@ -57,7 +44,7 @@
       <file leaf-file-name="post_activity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jim/demo1/post_activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2" vertical-offset="0" max-vertical-offset="1020">
+            <state vertical-scroll-proportion="0.7920792" vertical-offset="0" max-vertical-offset="1020">
               <caret line="62" column="139" selection-start-line="62" selection-start-column="139" selection-end-line="62" selection-end-column="139" />
               <folding>
                 <element signature="e#1385#2803#0" expanded="true" />
@@ -1820,12 +1807,16 @@
       <created>1428672794450</created>
       <updated>1428672794450</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Post Beer list is now populating without the image. I am getting an error with the images that the URL is bad">
+      <created>1428706672515</created>
+      <updated>1428706672515</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1839,7 +1830,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1902,7 +1893,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Cleaning up the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaning up the project" />
+    <MESSAGE value="Post Beer list is now populating without the image. I am getting an error with the images that the URL is bad" />
+    <option name="LAST_COMMIT_MESSAGE" value="Post Beer list is now populating without the image. I am getting an error with the images that the URL is bad" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2102,7 +2094,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/jim/demo1/post_activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2" vertical-offset="0" max-vertical-offset="1020">
+        <state vertical-scroll-proportion="0.7920792" vertical-offset="0" max-vertical-offset="1020">
           <caret line="62" column="139" selection-start-line="62" selection-start-column="139" selection-end-line="62" selection-end-column="139" />
           <folding>
             <element signature="e#1385#2803#0" expanded="true" />
