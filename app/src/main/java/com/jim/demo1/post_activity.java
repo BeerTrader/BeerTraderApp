@@ -1,7 +1,12 @@
 package com.jim.demo1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -22,11 +27,12 @@ import java.util.ArrayList;
  */
 public class post_activity extends Activity {
 
-//    private ImageButton button;
-    private String url = "https://api.untappd.com/v4/search/beer/?q=Stella&client_id=28CF9AABA9878838EAAA37110B0B38FD6B8A3CC0&client_secret=B6DB39BF04ECFD467E7B33D129AD9E99D4DA2ABE&limit=25";
+    private String url1 = "https://api.untappd.com/v4/search/beer/?q=";
+    private String url2 = "&client_id=28CF9AABA9878838EAAA37110B0B38FD6B8A3CC0&client_secret=B6DB39BF04ECFD467E7B33D129AD9E99D4DA2ABE&limit=25";
     private ArrayList<Beer> beers = new ArrayList<>();
     private CustomAdapter adapter;
     public ListView listView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,16 +40,45 @@ public class post_activity extends Activity {
         setContentView(R.layout.post_layout);
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomAdapter(this, beers);
-        listView.setAdapter(adapter);
+        final EditText inputSearch;
+        final Button searchBeersButton;
 
-        getBeers();
+        inputSearch = (EditText) findViewById(R.id.beerSearchText);
+        searchBeersButton = (Button) findViewById(R.id.searchBeersButton);
 
-        //List Item Click Listener
+        searchBeersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getBeers(inputSearch.getText().toString());
+
+                //List Item Click Listener
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(post_activity.this, add_beer_activity.class);
+                        intent.putExtra("imgUrl", beers.get(position).getImgUrl());
+                        intent.putExtra("beerName", beers.get(position).getBeer_name());
+                        intent.putExtra("brewery", beers.get(position).getBrewery());
+                        intent.putExtra("beerType", beers.get(position).getBeer_style());
+                        startActivity(intent);
+                    }
+                });
+                listView.setAdapter(adapter);
+            }
+        });
+
+
+
+
+
+
     }
 
-    public void getBeers() {
+
+
+    public void getBeers(String searchText) {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, (url1 + searchText + url2), null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {

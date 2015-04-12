@@ -42,6 +42,10 @@
             android:name=".CreateUser"
             android:label="@string/title_activity_create_user" >
         </activity>
+        <activity
+            android:name=".add_beer_activity"
+            android:label="@string/AddBeer" >
+        </activity>
     </application>
 
 </manifest>
