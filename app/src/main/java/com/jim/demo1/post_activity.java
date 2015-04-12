@@ -45,36 +45,31 @@ public class post_activity extends Activity {
 
         inputSearch = (EditText) findViewById(R.id.beerSearchText);
         searchBeersButton = (Button) findViewById(R.id.searchBeersButton);
+        listView.setAdapter(adapter);
 
-        searchBeersButton.setOnClickListener(new View.OnClickListener() {
+        //List Item Click Listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                getBeers(inputSearch.getText().toString());
-
-                //List Item Click Listener
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(post_activity.this, add_beer_activity.class);
-                        intent.putExtra("imgUrl", beers.get(position).getImgUrl());
-                        intent.putExtra("beerName", beers.get(position).getBeer_name());
-                        intent.putExtra("brewery", beers.get(position).getBrewery());
-                        intent.putExtra("beerType", beers.get(position).getBeer_style());
-                        startActivity(intent);
-                    }
-                });
-                listView.setAdapter(adapter);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(post_activity.this, add_beer_activity.class);
+                intent.putExtra("imgUrl", beers.get(position).getImgUrl());
+                intent.putExtra("beerName", beers.get(position).getBeer_name());
+                intent.putExtra("brewery", beers.get(position).getBrewery());
+                intent.putExtra("beerType", beers.get(position).getBeer_style());
+                startActivity(intent);
             }
         });
 
-
-
-
-
+        //Search Button Listener
+        searchBeersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beers.clear();
+                getBeers(inputSearch.getText().toString());
+            }
+        });
 
     }
-
-
 
     public void getBeers(String searchText) {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
