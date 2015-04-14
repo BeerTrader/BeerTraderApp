@@ -39,9 +39,17 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="Inventory"
+        android:id="@+id/InventoryButton"
+        android:layout_below="@+id/profileAppSettingsButton"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="@string/contact_text"
         android:id="@+id/profileContactButton"
-        android:layout_below="@+id/profileAppSettingsButton"
+        android:layout_below="@+id/InventoryButton"
         android:layout_alignParentStart="true" />
 
     <Button

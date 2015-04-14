@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 /**
  * Created by Jim on 2/2/2015.
@@ -23,6 +22,7 @@ public class profile_activity extends Activity {
         setContentView(R.layout.profile_layout);
         addListenerOnButtonAppSettings();
         addListenerOnButtonContact();
+        addListenerOnButtonInventory();
     }
 
     public void addListenerOnButtonAppSettings() {
@@ -64,4 +64,25 @@ public class profile_activity extends Activity {
         });
 
     }
+
+    public void addListenerOnButtonInventory() {
+
+        final Context context = this;
+
+        button = (Button) findViewById(R.id.InventoryButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, Inventory.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+    }
 }
+

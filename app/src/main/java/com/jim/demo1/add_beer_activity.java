@@ -1,6 +1,8 @@
 package com.jim.demo1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +17,12 @@ public class add_beer_activity extends Activity{
 
     ImageButton addBeerButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_beer_layout);
         addListenerOnButton();
-
     }
 
     private void addListenerOnButton() {
@@ -32,10 +34,7 @@ public class add_beer_activity extends Activity{
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                // add beer to database
-
-                Toast.makeText(add_beer_activity.this,
-                        "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
+                showAlert();
             }
 
         });
@@ -53,8 +52,33 @@ public class add_beer_activity extends Activity{
             beerName.setText(intent.getCharSequenceExtra("beerName"));
             brewery.setText(intent.getCharSequenceExtra("brewery"));
             beerType.setText(intent.getCharSequenceExtra("beerType"));
-
         }
+    }
+
+    private void showAlert() {
+
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        alertbox.setMessage("Do you want to Add This beer to your Inventory?");
+
+        alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub Add Beer to Inventory
+
+                Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertbox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // display box
+        alertbox.show();
     }
 
 

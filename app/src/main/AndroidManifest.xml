@@ -46,6 +46,10 @@
             android:name=".add_beer_activity"
             android:label="@string/AddBeer" >
         </activity>
+        <activity
+            android:name=".Inventory"
+            android:label="@string/Inventory" >
+        </activity>
     </application>
 
 </manifest>

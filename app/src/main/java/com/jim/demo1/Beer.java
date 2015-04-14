@@ -17,12 +17,15 @@ public class Beer {
         this.imgUrl = imgUrl;
     }
 
+
+
     public String getBeer_name() {
         return beer_name;
     }
 
     public void setBeer_name(String beer_name) {
-        this.beer_name = beer_name;
+
+        this.beer_name = beer_name.replace("\"", "");
     }
 
     public String getBrewery() {
@@ -38,7 +41,8 @@ public class Beer {
     }
 
     public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+
+        this.imgUrl = imgUrl.replace("\\", "").replace("\"", "");
     }
 
     public String getBeer_style() {
@@ -49,3 +53,4 @@ public class Beer {
         this.beer_style = beer_style;
     }
 }
+
