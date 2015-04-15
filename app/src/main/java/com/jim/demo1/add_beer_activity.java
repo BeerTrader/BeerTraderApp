@@ -4,11 +4,23 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Jim on 4/7/2015.
@@ -16,6 +28,9 @@ import android.widget.Toast;
 public class add_beer_activity extends Activity{
 
     ImageButton addBeerButton;
+    private String beerNameInv;
+    private String breweryInv;
+    private String beerTypeInv;
 
 
     @Override
@@ -33,7 +48,6 @@ public class add_beer_activity extends Activity{
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
                 showAlert();
             }
 
@@ -46,8 +60,11 @@ public class add_beer_activity extends Activity{
         Intent intent = getIntent();
         if (intent != null) {
             TextView beerName = (TextView) findViewById(R.id.beerName);
+            beerNameInv = beerName.toString();
             TextView brewery= (TextView) findViewById(R.id.brewery);
+            breweryInv = brewery.toString();
             TextView beerType = (TextView) findViewById(R.id.beerType);
+            beerTypeInv = beerType.toString();
             String imgUrl = intent.getCharSequenceExtra("imgUrl").toString();
             beerName.setText(intent.getCharSequenceExtra("beerName"));
             brewery.setText(intent.getCharSequenceExtra("brewery"));
@@ -65,7 +82,8 @@ public class add_beer_activity extends Activity{
 
             public void onClick(DialogInterface arg0, int arg1) {
                 // TODO Auto-generated method stub Add Beer to Inventory
-
+                String postUrl = "https://140.192.30.230:8443/beertrader/rest/offerable/addOfferable";
+                new POST().execute(postUrl, beerNameInv, beerTypeInv, breweryInv);
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
             }
         });
@@ -81,6 +99,42 @@ public class add_beer_activity extends Activity{
         alertbox.show();
     }
 
+    class POST extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            String url = params[0];
+            String beerName = params[1];
+            String beerType = params[2];
+            String brewery = params[3];
+            JSONObject jsonobj = new JSONObject();
+            try {
+                jsonobj.put("BEER", beerName);
+                jsonobj.put("BEERTYPE", beerType);
+                jsonobj.put("BREWERY", brewery);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
 
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
+            HttpPost httpPostReq = new HttpPost(url);
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 }
