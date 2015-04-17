@@ -52,9 +52,11 @@ public class Inventory_Adapter extends BaseAdapter{
 
 //        pic = (ImageView) row.findViewById(R.id.inventoryLablePic);
         TextView theBeerName = (TextView) row.findViewById(R.id.inventoryBeerName);
-        TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
+        TextView theBreweryName = (TextView) row.findViewById(R.id.inventoryBrewery);
 
         Beer b = inventoryList.get(position);
+        System.out.println("BEER NAME = " + b.getBeer_name());
+        System.out.println("BEER BREW = " + b.getBrewery());
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
         //mImageLoader = RequestSingleton.getInstance().getImageLoader();

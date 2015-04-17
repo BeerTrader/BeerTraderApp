@@ -10,8 +10,8 @@
         android:padding="4dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -21,13 +21,19 @@
             android:textStyle="bold"
             android:textSize="16sp"/>
 
-        <Button
-            android:id="@+id/delete_btn"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:layout_gravity="right" />
+            android:id="@+id/inventoryBrewery"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"/>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CustomAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private List<Beer> beerList;
     ImageLoader mImageLoader;
-    ImageView pic;
+    NetworkImageView mNetworkImageView;
 
     public CustomAdapter(Activity activity, List<Beer> bList) {
         this.activity = activity;
@@ -52,7 +53,7 @@ public class CustomAdapter extends BaseAdapter{
             row = inflater.inflate(R.layout.beer_list_row, parent, false);
         }
 
-        pic = (ImageView) row.findViewById(R.id.lablePic);
+        mNetworkImageView = (NetworkImageView) row.findViewById(R.id.lablePic);
         TextView theBeerName = (TextView) row.findViewById(R.id.beerName);
         TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
 
@@ -61,6 +62,7 @@ public class CustomAdapter extends BaseAdapter{
         theBreweryName.setText(b.getBrewery());
         //mImageLoader = RequestSingleton.getInstance().getImageLoader();
         //mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
+        //mNetworkImageView.setImageUrl(b.getImgUrl(), mImageLoader);
         return row;
     }
 }

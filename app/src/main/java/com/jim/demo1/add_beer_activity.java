@@ -37,22 +37,18 @@ public class add_beer_activity extends Activity{
     private String breweryInv;
     private String beerTypeInv;
     private String InvImgUrl;
-    public ListView addToInv;
-    private Inventory_Adapter adapter;
-
-
-
+    private TextView beerName;
+    private TextView brewery;
+    private TextView beerType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_beer_layout);
-        addToInv = (ListView) findViewById(R.id.inventory_list);
-        adapter = new Inventory_Adapter(this, beers);
-
+        beerName = (TextView) findViewById(R.id.beerName);
+        brewery= (TextView) findViewById(R.id.brewery);
+        beerType = (TextView) findViewById(R.id.beerType);
         addListenerOnButton();
-
-
     }
 
     private void addListenerOnButton() {
@@ -75,11 +71,8 @@ public class add_beer_activity extends Activity{
         super.onStart();
         Intent intent = getIntent();
         if (intent != null) {
-            TextView beerName = (TextView) findViewById(R.id.beerName);
             beerNameInv = beerName.toString();
-            TextView brewery= (TextView) findViewById(R.id.brewery);
             breweryInv = brewery.toString();
-            TextView beerType = (TextView) findViewById(R.id.beerType);
             beerTypeInv = beerType.toString();
             String imgUrl = intent.getCharSequenceExtra("imgUrl").toString();
             InvImgUrl = imgUrl;
@@ -102,11 +95,16 @@ public class add_beer_activity extends Activity{
             public void onClick(DialogInterface arg0, int arg1) {
                 // TODO Auto-generated method stub Add Beer to Inventory
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/offerable/addOfferable";
-                new POST().execute(postUrl, beerNameInv, beerTypeInv, breweryInv);
+                //new POST().execute(postUrl, beerNameInv, beerTypeInv, breweryInv);
+                new POST().execute(postUrl, beerName.getText().toString(), beerType.getText().toString(), brewery.getText().toString());
+                //TODO fix the URL here and in POST
+                //Beer b = new Beer(beerNameInv, breweryInv, beerTypeInv, InvImgUrl);
+                Beer b = new Beer(beerName.getText().toString(), brewery.getText().toString(), beerType.getText().toString(), InvImgUrl);
+                BeerInventory.beerInventory.add(b);
 
 
 
-                addToInv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                /*addToInv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(add_beer_activity.this, Inventory.class);
@@ -116,7 +114,7 @@ public class add_beer_activity extends Activity{
                         intent.putExtra("beerType", beers.get(position).getBeer_style());
                         startActivity(intent);
                     }
-                });
+                });*/
 
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
 
