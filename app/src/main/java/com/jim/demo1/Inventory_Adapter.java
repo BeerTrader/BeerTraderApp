@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.android.volley.toolbox.ImageLoader;
 
 import java.util.List;
 
@@ -21,8 +18,8 @@ public class Inventory_Adapter extends BaseAdapter{
     private LayoutInflater inflater;
     private List<Beer> inventoryList;
 
-    ImageLoader mImageLoader;
-    ImageView pic;
+//    ImageLoader mImageLoader;
+//    ImageView pic;
 
     public Inventory_Adapter(Activity activity, List<Beer> bList) {
         this.activity = activity;
@@ -53,13 +50,13 @@ public class Inventory_Adapter extends BaseAdapter{
             row = inflater.inflate(R.layout.inventory_list_row, parent, false);
         }
 
-        pic = (ImageView) row.findViewById(R.id.inventoryLablePic);
+//        pic = (ImageView) row.findViewById(R.id.inventoryLablePic);
         TextView theBeerName = (TextView) row.findViewById(R.id.inventoryBeerName);
-        //TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
+        TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
 
         Beer b = inventoryList.get(position);
         theBeerName.setText(b.getBeer_name());
-        //theBreweryName.setText(b.getBrewery());
+        theBreweryName.setText(b.getBrewery());
         //mImageLoader = RequestSingleton.getInstance().getImageLoader();
         //mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
         return row;

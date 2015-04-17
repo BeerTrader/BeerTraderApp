@@ -13,4 +13,7 @@ public class Inventory extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inventory_layout);
     }
+
+
+
 }
