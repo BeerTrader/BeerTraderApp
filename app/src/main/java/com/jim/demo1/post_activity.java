@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.codehaus.jackson.JsonNode;
@@ -19,6 +20,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
@@ -87,10 +90,16 @@ public class post_activity extends Activity {
                             int count = root.get("response").get("beers").get("count").asInt();
 
                             for (int i = 0; i < count; i++) {
-                                beers.add(new Beer((root.get("response").get("beers").get("items").get(i).get("beer").get("beer_name").toString()),
-                                        (root.get("response").get("beers").get("items").get(i).get("brewery").get("brewery_name").toString()),
-                                        (root.get("response").get("beers").get("items").get(i).get("beer").get("beer_style").toString()),
-                                        (root.get("response").get("beers").get("items").get(i).get("beer").get("beer_label").toString())));
+                                String beerName = root.get("response").get("beers").get("items").get(i).get("beer").get("beer_name").toString();
+                                String beerBrewery = root.get("response").get("beers").get("items").get(i).get("brewery").get("brewery_name").toString();
+                                String beerStyle = root.get("response").get("beers").get("items").get(i).get("beer").get("beer_style").toString();
+                                String BeerLabel = root.get("response").get("beers").get("items").get(i).get("beer").get("beer_label").toString();
+                                String urlEnd = BeerLabel.split("https://d1c8v1qci5en44", 2)[1];
+                                urlEnd = urlEnd.substring(0, urlEnd.length() - 1);
+                                try {
+                                    BeerLabel = "https://" + URLEncoder.encode("d1c8v1qci5en44", "UTF-8") + urlEnd;
+                                }catch (UnsupportedEncodingException e ) {e.printStackTrace();}
+                                beers.add(new Beer(beerName, beerBrewery, beerStyle, BeerLabel));
                             }
                             adapter.notifyDataSetChanged();
                         } catch (IOException e) {

@@ -12,6 +12,11 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -22,7 +27,7 @@ public class CustomAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private List<Beer> beerList;
     ImageLoader mImageLoader;
-    NetworkImageView mNetworkImageView;
+    ImageView pic;
 
     public CustomAdapter(Activity activity, List<Beer> bList) {
         this.activity = activity;
@@ -53,16 +58,15 @@ public class CustomAdapter extends BaseAdapter{
             row = inflater.inflate(R.layout.beer_list_row, parent, false);
         }
 
-        mNetworkImageView = (NetworkImageView) row.findViewById(R.id.lablePic);
+        pic = (ImageView) row.findViewById(R.id.lablePic);
         TextView theBeerName = (TextView) row.findViewById(R.id.beerName);
         TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
 
         Beer b = beerList.get(position);
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
-        //mImageLoader = RequestSingleton.getInstance().getImageLoader();
-        //mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
-        //mNetworkImageView.setImageUrl(b.getImgUrl(), mImageLoader);
+        mImageLoader = RequestSingleton.getInstance().getImageLoader();
+        mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
         return row;
     }
 }
