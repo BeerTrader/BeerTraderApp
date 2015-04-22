@@ -17,7 +17,7 @@ public class Inventory extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inventory_layout);
         listView = (ListView) findViewById(R.id.list);
-        adapter = new Inventory_Adapter(this, BeerInventory.beerInventory);
+        adapter = new Inventory_Adapter(this, PersistentData.beerInventory);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

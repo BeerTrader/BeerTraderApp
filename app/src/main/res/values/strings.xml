@@ -10,6 +10,8 @@
     <string name="matchText">MatchText</string>
     <string name="profileName">Barry Duffman</string>
     <string name="createUser">CREATE NEW USER</string>
+    <string name="signUp">SIGN UP</string>
+    <string name="login">LOGIN</string>
     <string name="app_settings_title_text">NOTIFICATIONS</string>
     <string name="profile_app_settings_button">App Settings</string>
     <string name="contact_text">Contact BeerTrader</string>

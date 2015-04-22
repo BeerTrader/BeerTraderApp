@@ -18,6 +18,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,10 +33,6 @@ import java.util.ArrayList;
 public class add_beer_activity extends Activity{
 
     ImageButton addBeerButton;
-    private ArrayList<Beer> beers = new ArrayList<>();
-    private String beerNameInv;
-    private String breweryInv;
-    private String beerTypeInv;
     private String InvImgUrl;
     private TextView beerName;
     private TextView brewery;
@@ -71,9 +68,6 @@ public class add_beer_activity extends Activity{
         super.onStart();
         Intent intent = getIntent();
         if (intent != null) {
-            beerNameInv = beerName.toString();
-            breweryInv = brewery.toString();
-            beerTypeInv = beerType.toString();
             String imgUrl = intent.getCharSequenceExtra("imgUrl").toString();
             InvImgUrl = imgUrl;
             beerName.setText(intent.getCharSequenceExtra("beerName"));
@@ -87,7 +81,6 @@ public class add_beer_activity extends Activity{
 
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 
-
         alertbox.setMessage("Do you want to Add This beer to your Inventory?");
 
         alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
@@ -95,26 +88,9 @@ public class add_beer_activity extends Activity{
             public void onClick(DialogInterface arg0, int arg1) {
                 // TODO Auto-generated method stub Add Beer to Inventory
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/offerable/addOfferable";
-                //new POST().execute(postUrl, beerNameInv, beerTypeInv, breweryInv);
                 new POST().execute(postUrl, beerName.getText().toString(), beerType.getText().toString(), brewery.getText().toString());
-                //TODO fix the URL here and in POST
-                //Beer b = new Beer(beerNameInv, breweryInv, beerTypeInv, InvImgUrl);
                 Beer b = new Beer(beerName.getText().toString(), brewery.getText().toString(), beerType.getText().toString(), InvImgUrl);
-                BeerInventory.beerInventory.add(b);
-
-
-
-                /*addToInv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(add_beer_activity.this, Inventory.class);
-                        intent.putExtra("imgUrl", beers.get(position).getImgUrl());
-                        intent.putExtra("beerName", beers.get(position).getBeer_name());
-                        intent.putExtra("brewery", beers.get(position).getBrewery());
-                        intent.putExtra("beerType", beers.get(position).getBeer_style());
-                        startActivity(intent);
-                    }
-                });*/
+                PersistentData.beerInventory.add(b);
 
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
 
@@ -163,17 +139,16 @@ public class add_beer_activity extends Activity{
             HttpClient httpClient = t.getNewHttpClient();
 
             HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PersistentData.authorization);
             try{
                 StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
                 se.setContentType("application/json; charset=UTF-8");
                 httpPostReq.setEntity(se);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                System.out.println(httpResponse.getStatusLine().getStatusCode());
-//                httpResponse.getEntity().
+                //TODO REMOVE!!!
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
