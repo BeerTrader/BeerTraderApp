@@ -24,6 +24,6 @@
     <string name="brewery">breweryName</string>
     <string name="beerType">beerType</string>
     <string name="AddBeer">Add Beer</string>
-    <string name="Inventory">Inventory_Titile</string>
+    <string name="Inventory">Inventory</string>
 
 </resources>

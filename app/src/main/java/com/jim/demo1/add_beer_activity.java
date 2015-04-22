@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +16,12 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 /**
  * Created by Jim on 4/7/2015.
@@ -45,6 +41,7 @@ public class add_beer_activity extends Activity{
         beerName = (TextView) findViewById(R.id.beerName);
         brewery= (TextView) findViewById(R.id.brewery);
         beerType = (TextView) findViewById(R.id.beerType);
+        //InvImgUrl = (ImageView) findViewById(R.id.lablePic);
         addListenerOnButton();
     }
 
