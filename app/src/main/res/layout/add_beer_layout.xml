@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/lablePic"
+            android:id="@+id/InvLablePic"
             android:padding="4dp"/>
 
     </LinearLayout>
