@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Inventory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,38 +10,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
+import com.jim.demo1.Post.Beer;
+import com.jim.demo1.R;
+import com.jim.demo1.Tools.RequestSingleton;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 /**
- * Created by Jim on 4/7/2015.
+ * Created by Jim on 4/13/2015.
  */
-public class CustomAdapter extends BaseAdapter{
+public class Inventory_Adapter extends BaseAdapter{
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Beer> beerList;
+    private List<Beer> inventoryList;
+
     ImageLoader mImageLoader;
     ImageView pic;
 
-    public CustomAdapter(Activity activity, List<Beer> bList) {
+    public Inventory_Adapter(Activity activity, List<Beer> bList) {
         this.activity = activity;
-        this.beerList = bList;
+        this.inventoryList = bList;
     }
 
     @Override
     public int getCount() {
-        return beerList.size();
+        return inventoryList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return beerList.get(position);
+        return inventoryList.get(position);
     }
 
     @Override
@@ -55,14 +53,14 @@ public class CustomAdapter extends BaseAdapter{
         if (convertView == null) {
             if (inflater == null)
                 inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.beer_list_row, parent, false);
+            row = inflater.inflate(R.layout.inventory_list_row, parent, false);
         }
 
-        pic = (ImageView) row.findViewById(R.id.lablePic);
-        TextView theBeerName = (TextView) row.findViewById(R.id.beerName);
-        TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
+        pic = (ImageView) row.findViewById(R.id.inventoryLablePic);
+        TextView theBeerName = (TextView) row.findViewById(R.id.inventoryBeerName);
+        TextView theBreweryName = (TextView) row.findViewById(R.id.inventoryBrewery);
 
-        Beer b = beerList.get(position);
+        Beer b = inventoryList.get(position);
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
         mImageLoader = RequestSingleton.getInstance().getImageLoader();

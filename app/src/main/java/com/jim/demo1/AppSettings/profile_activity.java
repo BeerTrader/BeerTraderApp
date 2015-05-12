@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.AppSettings;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.jim.demo1.AppSettings.app_settings_activity;
+import com.jim.demo1.AppSettings.contact_activity;
+import com.jim.demo1.Inventory.Inventory;
+import com.jim.demo1.R;
 
 /**
  * Created by Jim on 2/2/2015.

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:hint="Search" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Styles"
+        android:id="@+id/FavStyle"
+        android:layout_alignTop="@+id/FavBrewery"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breweries"
+        android:id="@+id/FavBrewery"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beers"
+        android:id="@+id/FavBeer"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addFavsListView"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/FavStyle" />
+
+
+
+
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.AppSettings;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -7,6 +7,10 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.jim.demo1.R;
+import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -53,6 +57,7 @@ public class CreateUser extends Activity {
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new Login().execute(loginURL, uName, uPwd);
+
             }
         });
 

@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Post;
 
 /**
  * Created by Jim on 4/7/2015.

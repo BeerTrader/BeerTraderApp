@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Post;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.jim.demo1.R;
+import com.jim.demo1.Tools.RequestSingleton;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;

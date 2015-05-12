@@ -1,17 +1,18 @@
-package com.jim.demo1;
+package com.jim.demo1.Favorites;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.jim.demo1.R;
+
 /**
- * Created by Jim on 2/2/2015.
+ * Created by Jim on 5/2/2015.
  */
-public class matches_activity extends Activity implements LocationListener {
+public class Location extends Activity implements LocationListener {
     protected LocationManager locationManager;
     myLocation myLocation;
 
@@ -29,12 +30,10 @@ public class matches_activity extends Activity implements LocationListener {
 
 
     @Override
-    public void onLocationChanged(Location location) {
-       myLocation = new myLocation(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
-       // myLocation.setLatd(location.getLatitude());
-        System.out.println("Latitude = " + myLocation.getLatd());
-       // myLocation.setLongd(location.getLongitude());
-        System.out.println("Longitude = " + myLocation.getLongd());
+    public void onLocationChanged(android.location.Location location) {
+        myLocation = new myLocation((location.getLatitude()), (location.getLongitude()));
+        System.out.println("Latitude = " + String.valueOf(myLocation.getLatd()));
+        System.out.println("Longitude = " + String.valueOf(myLocation.getLongd()));
 
 
     }
@@ -57,28 +56,31 @@ public class matches_activity extends Activity implements LocationListener {
 }
 
 
-class myLocation{
-    String latd;
-    String longd;
+class myLocation {
+    double latd;
+    double longd;
 
-    public myLocation(String theLat, String theLong){
+    public myLocation(double theLat, double theLong) {
         this.latd = theLat;
         this.longd = theLong;
     }
 
-    public String getLatd() {
+    public double getLatd() {
         return latd;
     }
 
-    public void setLatd(String latd) {
+    public void setLatd(double latd) {
         this.latd = latd;
     }
 
-    public String getLongd() {
+    public double getLongd() {
         return longd;
     }
 
-    public void setLongd(String longd) {
+    public void setLongd(double longd) {
         this.longd = longd;
+    }
+
+    {
     }
 }

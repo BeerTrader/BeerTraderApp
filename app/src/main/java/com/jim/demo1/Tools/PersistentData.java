@@ -1,4 +1,7 @@
-package com.jim.demo1;
+package com.jim.demo1.Tools;
+
+import com.jim.demo1.Favorites.Favs;
+import com.jim.demo1.Post.Beer;
 
 import java.util.ArrayList;
 
@@ -7,5 +10,8 @@ import java.util.ArrayList;
  */
 public class PersistentData {
     public static ArrayList<Beer> beerInventory = new ArrayList<>();
+    public static ArrayList<Favs> favsInventory = new ArrayList<>();
     public static String authorization;
+
+
 }
