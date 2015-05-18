@@ -19,36 +19,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".profile_activity"
+            android:name=".AppSettings.profile_activity"
             android:label="@string/ProfileButton" >
         </activity>
         <activity
-            android:name=".post_activity"
+            android:name=".Post.post_activity"
             android:label="@string/PostButton" >
         </activity>
         <activity
-            android:name=".matches_activity"
+            android:name=".Matches.matches_activity"
             android:label="@string/MatchButton" >
         </activity>
         <activity
-            android:name=".app_settings_activity"
+            android:name=".AppSettings.app_settings_activity"
             android:label="@string/profile_app_settings_button" >
         </activity>
         <activity
-            android:name=".contact_activity"
+            android:name=".AppSettings.contact_activity"
             android:label="@string/contact_text" >
         </activity>
         <activity
-            android:name=".CreateUser"
+            android:name=".AppSettings.CreateUser"
             android:label="@string/title_activity_create_user" >
         </activity>
         <activity
-            android:name=".add_beer_activity"
+            android:name=".Post.add_beer_activity"
             android:label="@string/AddBeer" >
         </activity>
         <activity
-            android:name=".Inventory"
+            android:name=".Inventory.Inventory"
             android:label="@string/Inventory" >
+        </activity>
+        <activity
+            android:name=".Favorites.FavesPage"
+            android:label="@string/FavesPage" >
+        </activity>
+        <activity
+            android:name=".Favorites.Favorites"
+            android:label="My Favorites" >
         </activity>
     </application>
 

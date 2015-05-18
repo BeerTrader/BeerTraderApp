@@ -1,8 +1,11 @@
-package com.jim.demo1;
+package com.jim.demo1.Inventory;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
+
+import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.R;
 
 /**
  * Created by Jim on 4/13/2015.

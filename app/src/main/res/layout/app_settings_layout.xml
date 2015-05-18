@@ -9,8 +9,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/app_settings_title_text"
         android:id="@+id/app_settings_title"
-        android:layout_below="@+id/profilePicChangeButton"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/addToFavoritesButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="64dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,9 +19,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="New Messages"
         android:id="@+id/new_messages_text"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/app_settings_title"
-        android:layout_alignParentLeft="true" />
+        android:layout_above="@+id/new_messages_switch"
+        android:layout_alignParentStart="true" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="New Match"
         android:id="@+id/new_match_text"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="88dp"
         android:layout_below="@+id/new_match_switch"
         android:layout_alignParentStart="true" />
 
@@ -49,8 +49,16 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Change Profile Picture"
-        android:id="@+id/profilePicChangeButton"
+        android:text="Add To Favorites"
+        android:id="@+id/addToFavoritesButton"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="My Favorites"
+        android:id="@+id/myFavoritesButton"
+        android:layout_below="@+id/addToFavoritesButton"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

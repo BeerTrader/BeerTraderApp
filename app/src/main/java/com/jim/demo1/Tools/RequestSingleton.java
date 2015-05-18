@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Tools;
 
 import android.app.Application;
 import android.content.Context;

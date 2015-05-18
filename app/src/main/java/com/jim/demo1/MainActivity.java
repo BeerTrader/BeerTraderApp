@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jim.demo1.AppSettings.CreateUser;
+import com.jim.demo1.AppSettings.profile_activity;
+import com.jim.demo1.Matches.matches_activity;
+import com.jim.demo1.Post.post_activity;
+
 public class MainActivity extends Activity {
 
     Button button;

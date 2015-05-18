@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Post;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jim.demo1.R;
+import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

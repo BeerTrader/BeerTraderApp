@@ -1,4 +1,4 @@
-package com.jim.demo1;
+package com.jim.demo1.Post;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,33 +10,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.jim.demo1.R;
+import com.jim.demo1.Tools.RequestSingleton;
 
 import java.util.List;
 
 /**
- * Created by Jim on 4/13/2015.
+ * Created by Jim on 4/7/2015.
  */
-public class Inventory_Adapter extends BaseAdapter{
+public class CustomAdapter extends BaseAdapter{
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Beer> inventoryList;
-
+    private List<Beer> beerList;
     ImageLoader mImageLoader;
     ImageView pic;
 
-    public Inventory_Adapter(Activity activity, List<Beer> bList) {
+    public CustomAdapter(Activity activity, List<Beer> bList) {
         this.activity = activity;
-        this.inventoryList = bList;
+        this.beerList = bList;
     }
 
     @Override
     public int getCount() {
-        return inventoryList.size();
+        return beerList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return inventoryList.get(position);
+        return beerList.get(position);
     }
 
     @Override
@@ -50,14 +51,14 @@ public class Inventory_Adapter extends BaseAdapter{
         if (convertView == null) {
             if (inflater == null)
                 inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.inventory_list_row, parent, false);
+            row = inflater.inflate(R.layout.beer_list_row, parent, false);
         }
 
-        pic = (ImageView) row.findViewById(R.id.inventoryLablePic);
-        TextView theBeerName = (TextView) row.findViewById(R.id.inventoryBeerName);
-        TextView theBreweryName = (TextView) row.findViewById(R.id.inventoryBrewery);
+        pic = (ImageView) row.findViewById(R.id.lablePic);
+        TextView theBeerName = (TextView) row.findViewById(R.id.beerName);
+        TextView theBreweryName = (TextView) row.findViewById(R.id.brewery);
 
-        Beer b = inventoryList.get(position);
+        Beer b = beerList.get(position);
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
         mImageLoader = RequestSingleton.getInstance().getImageLoader();
