@@ -12,6 +12,6 @@ public class PersistentData {
     public static ArrayList<Beer> beerInventory = new ArrayList<>();
     public static ArrayList<Favs> favsInventory = new ArrayList<>();
     public static String authorization;
-
-
+    public static String latitude;
+    public static String longitude;
 }

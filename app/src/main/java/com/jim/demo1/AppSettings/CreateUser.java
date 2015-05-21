@@ -1,6 +1,7 @@
 package com.jim.demo1.AppSettings;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.jim.demo1.R;
 import com.jim.demo1.Tools.PersistentData;
 import com.jim.demo1.Tools.Truster;
@@ -26,20 +30,29 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+public class CreateUser extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-public class CreateUser extends Activity {
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
+    EditText textName;
+    EditText textPwd;
+    Button signUpBtn;
+    Button loginBtn;
+    String signUpURL;
+    String loginURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
-        final EditText textName = (EditText)findViewById(R.id.loginName);
-        final EditText textPwd = (EditText)findViewById(R.id.loginPwd);
-        final Button signUpBtn = (Button)findViewById(R.id.signUp);
-        final Button loginBtn = (Button)findViewById(R.id.login);
-        final String signUpURL = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
-        final String loginURL = "https://140.192.30.230:8443/beertrader/rest/user/login";
+        textName = (EditText)findViewById(R.id.loginName);
+        textPwd = (EditText)findViewById(R.id.loginPwd);
+        signUpBtn = (Button)findViewById(R.id.signUp);
+        loginBtn = (Button)findViewById(R.id.login);
+        signUpURL = "https://140.192.30.230:8443/beertrader/rest/user/createUser";
+        loginURL = "https://140.192.30.230:8443/beertrader/rest/user/login";
+        buildGoogleApiClient();
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +76,40 @@ public class CreateUser extends Activity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            PersistentData.latitude = String.valueOf(mLastLocation.getLatitude());
+            PersistentData.longitude = String.valueOf(mLastLocation.getLongitude());
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
     class SignUp extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
@@ -73,6 +120,9 @@ public class CreateUser extends Activity {
             try {
                 jsonobj.put("username", name);
                 jsonobj.put("password", password);
+                //TODO update these with the real long and lat
+                jsonobj.put("latitude", PersistentData.latitude);
+                jsonobj.put("longitude", PersistentData.longitude);
             } catch(JSONException e) {
                 e.printStackTrace();
             }
@@ -126,5 +176,13 @@ public class CreateUser extends Activity {
             }
             return null;
         }
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
     }
 }

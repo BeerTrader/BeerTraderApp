@@ -35,19 +35,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project('libs:volley')
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
-}
-
-task writeNewPom << {
-    pom {
-        project {
-            inceptionYear '2008'
-            licenses {
-                license {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    distribution 'repo'
-                }
-            }
-        }
-    }.writeTo("pom.xml")
+    compile 'com.google.android.gms:play-services:7.3.0'
 }
