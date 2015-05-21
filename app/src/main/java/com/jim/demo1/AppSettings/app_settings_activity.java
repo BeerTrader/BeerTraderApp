@@ -9,9 +9,12 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 
+import com.jim.demo1.Exceptions.ObjectMappingException;
 import com.jim.demo1.Favorites.FavesPage;
 import com.jim.demo1.Favorites.Favorites;
 import com.jim.demo1.Matches.matches_activity;
+import com.jim.demo1.Objects.Match;
+import com.jim.demo1.Objects.ObjectManager;
 import com.jim.demo1.R;
 import com.jim.demo1.Tools.PersistentData;
 import com.jim.demo1.Tools.Truster;
@@ -29,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -39,7 +43,9 @@ public class app_settings_activity extends Activity{
     Button FavsButton;
     Button MyFavsButton;
     Button getMatchesButton;
+    Button retrieveMatchesButton;
     final String matchesURL = "https://140.192.30.230:8443/beertrader/rest/match/getMatches";
+    ArrayList<Match> matchList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +54,20 @@ public class app_settings_activity extends Activity{
         addToFavoritesButton();
         myFavoritesButton();
         getMatchesButton();
+        retrieveMatchesButton();
+    }
 
+    private void retrieveMatchesButton() {
+        retrieveMatchesButton = (Button) findViewById(R.id.retrieveMatchesButton);
+        final Context context = this;
+        retrieveMatchesButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                new getMatches().execute(matchesURL, PersistentData.authorization);
+            }
+
+        });
     }
 
     private void getMatchesButton() {
@@ -59,8 +77,10 @@ public class app_settings_activity extends Activity{
 
             @Override
             public void onClick(View arg0) {
-                new getMatches().execute(matchesURL, PersistentData.authorization);
                 Intent intent = new Intent(context, matches_activity.class);
+                System.out.println("size of matches before = " + matchList.size());
+                //intent.putParcelableArrayListExtra("matches", matchList);
+                intent.putParcelableArrayListExtra("matches", matchList);
                 startActivity(intent);
             }
 
@@ -112,18 +132,19 @@ public class app_settings_activity extends Activity{
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 HttpEntity entity = httpResponse.getEntity();
                 String response = EntityUtils.toString(entity);
-                System.out.println("response = " + response);
 
-                //getting the object
+                //build out the arraylist of matches
                 JSONObject obj = new JSONObject(response);
                 final JSONArray matches = obj.getJSONArray("matchList");
                 final int n = matches.length();
                 for (int i = 0; i < n; ++i) {
-                    final JSONObject person = matches.getJSONObject(i);
-                    System.out.println(person.getString("offerable"));
+                    final JSONObject object = matches.getJSONObject(i);
+                    try{
+                        Match match = (Match) ObjectManager.readObjectAsString(object.toString(), Match.class);
+                        System.out.println("match before " + match.getOfferer().toString());
+                        matchList.add(match);
+                    } catch(ObjectMappingException e) { e.printStackTrace();}
                 }
-                ///
-
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
