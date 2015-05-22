@@ -78,8 +78,6 @@ public class app_settings_activity extends Activity{
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, matches_activity.class);
-                System.out.println("size of matches before = " + matchList.size());
-                //intent.putParcelableArrayListExtra("matches", matchList);
                 intent.putParcelableArrayListExtra("matches", matchList);
                 startActivity(intent);
             }
@@ -141,7 +139,6 @@ public class app_settings_activity extends Activity{
                     final JSONObject object = matches.getJSONObject(i);
                     try{
                         Match match = (Match) ObjectManager.readObjectAsString(object.toString(), Match.class);
-                        System.out.println("match before " + match.getOfferer().toString());
                         matchList.add(match);
                     } catch(ObjectMappingException e) { e.printStackTrace();}
                 }

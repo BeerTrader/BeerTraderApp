@@ -71,10 +71,6 @@ public class Match implements Parcelable {
         offerable = (TradingEntity) in.readParcelable(TradingEntity.class.getClassLoader());
         desirable = (TradingEntity) in.readParcelable(TradingEntity.class.getClassLoader());
         id = in.readLong();
-        //offerer = in.readParcelable(getClass().getClassLoader());
-        //desirer = in.readParcelable(getClass().getClassLoader());
-        //offerable = in.readParcelable(getClass().getClassLoader());
-        //desirable = in.readParcelable(getClass().getClassLoader());
     }
 
     public static final Parcelable.Creator<Match> CREATOR = new Parcelable.Creator<Match>() {
