@@ -1,16 +1,19 @@
 package com.jim.demo1.Matches;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jim.demo1.AppSettings.app_settings_activity;
+import com.jim.demo1.MainActivity;
 import com.jim.demo1.Objects.Match;
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
 
 import java.util.ArrayList;
 
@@ -67,11 +70,44 @@ public class matches_activity extends Activity {
                     offerable = match.getOfferable().getName().toString();
                     desirable = match.getDesirable().getName().toString();
                     matchText.setText(offerer + " is offering " + offerable + " and " + desirer + " wants " + desirable);
+                    System.out.println(matches.size());
+                }
+                else{
+                    showAlert2();
+
                 }
             }
 
         });
     }
+
+    private void showAlert2() {
+
+            final Context context = this;
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+            alertbox.setMessage("NO MORE MATCHES");
+
+            alertbox.setPositiveButton("More Matches", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Intent intent = new Intent(context, app_settings_activity.class);
+                    startActivity(intent);
+                }
+            });
+
+            alertbox.setNegativeButton("Home", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            // display box
+            alertbox.show();
+        }
+
 
     private void setRejectBtn() {
         rejectBtn = (Button) findViewById(R.id.rejectBtn);
@@ -88,6 +124,9 @@ public class matches_activity extends Activity {
                     offerable = match.getOfferable().getName().toString();
                     desirable = match.getDesirable().getName().toString();
                     matchText.setText(offerer + " is offering " + offerable + " and " + desirer + " wants " + desirable);
+                }
+                else{
+                    showAlert2();
                 }
 
             }
