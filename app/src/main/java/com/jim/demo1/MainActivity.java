@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.jim.demo1.AppSettings.CreateUser;
 import com.jim.demo1.AppSettings.profile_activity;
-import com.jim.demo1.Matches.matches_activity;
+import com.jim.demo1.Matches.matches_home_activity;
 import com.jim.demo1.Post.post_activity;
 
 public class MainActivity extends Activity {
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, matches_activity.class);
+                Intent intent = new Intent(context, matches_home_activity.class);
                 startActivity(intent);
 
             }

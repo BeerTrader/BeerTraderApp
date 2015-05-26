@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".AppSettings.CreateUser"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
             android:label="@string/contact_text" >
         </activity>
         <activity
-            android:name=".AppSettings.CreateUser"
+            android:name=".MainActivity"
             android:label="@string/title_activity_create_user" >
         </activity>
         <activity
@@ -57,6 +57,10 @@
         <activity
             android:name=".Favorites.Favorites"
             android:label="My Favorites" >
+        </activity>
+        <activity
+            android:name=".Matches.matches_home_activity"
+            android:label="Matches Home" >
         </activity>
     </application>
 

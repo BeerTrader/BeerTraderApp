@@ -1,6 +1,7 @@
 package com.jim.demo1.AppSettings;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,10 +9,13 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.jim.demo1.MainActivity;
 import com.jim.demo1.R;
 import com.jim.demo1.Tools.PersistentData;
 import com.jim.demo1.Tools.Truster;
@@ -40,12 +44,14 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
     Button loginBtn;
     String signUpURL;
     String loginURL;
+    TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
+        textview = (TextView) findViewById(R.id.InvalidText);
         textName = (EditText)findViewById(R.id.loginName);
         textPwd = (EditText)findViewById(R.id.loginPwd);
         signUpBtn = (Button)findViewById(R.id.signUp);
@@ -60,6 +66,8 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new SignUp().execute(signUpURL, uName, uPwd);
+                textview.setText("Username or Password Not Allowed");
+
             }
 
         });
@@ -70,6 +78,8 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new Login().execute(loginURL, uName, uPwd);
+                textview.setText("Invalid Username or Password");
+
 
             }
         });
@@ -140,6 +150,10 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             }
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                if(httpResponse.getStatusLine().getStatusCode() == 200){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -155,7 +169,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             String url = params[0];
             String name = params[1];
             String password = params[2];
-
+            final com.jim.demo1.AppSettings.CreateUser.Login context = this;
             Truster t = new Truster();
             HttpClient httpClient = t.getNewHttpClient();
 
@@ -167,15 +181,22 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 HttpResponse httpResponse = httpClient.execute(httpGetReq);
                 //TODO REMOVE!!!
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
-                HttpEntity entity = httpResponse.getEntity();
-                PersistentData.authorization = EntityUtils.toString(entity);
+                if(httpResponse.getStatusLine().getStatusCode() == 200){
+                    HttpEntity entity = httpResponse.getEntity();
+                    PersistentData.authorization = EntityUtils.toString(entity);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+
             }
             return null;
         }
+
     }
 
     protected synchronized void buildGoogleApiClient() {

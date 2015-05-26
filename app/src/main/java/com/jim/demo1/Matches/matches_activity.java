@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.jim.demo1.AppSettings.app_settings_activity;
 import com.jim.demo1.MainActivity;
 import com.jim.demo1.Objects.Match;
 import com.jim.demo1.R;
@@ -53,6 +52,9 @@ public class matches_activity extends Activity {
             desirable = match.getDesirable().getName().toString();
             matchText.setText(offerer + " is offering " + offerable + " and " + desirer + " wants " + desirable);
         }
+        else{
+            showAlert2();
+        }
     }
 
     private void setAccpetBtn() {
@@ -91,7 +93,7 @@ public class matches_activity extends Activity {
             alertbox.setPositiveButton("More Matches", new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface arg0, int arg1) {
-                    Intent intent = new Intent(context, app_settings_activity.class);
+                    Intent intent = new Intent(context, matches_home_activity.class);
                     startActivity(intent);
                 }
             });
