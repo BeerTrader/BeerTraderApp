@@ -3,6 +3,7 @@ package com.jim.demo1.Matches;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SyncAdapterType;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;

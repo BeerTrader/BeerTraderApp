@@ -42,7 +42,7 @@ public class User implements Parcelable {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+        return "\"id\":" + id + ",\"username\":\"" + username + "\",\"password\":" + password + ",\"latitude\":" + latitude + ",\"longitude\":" + longitude + "}";
     }
 
     @Override

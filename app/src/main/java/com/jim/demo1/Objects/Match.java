@@ -48,7 +48,7 @@ public class Match implements Parcelable {
 
     @Override
     public String toString() {
-        return "Match [id=" + id + "offerer=" + offerer + ", desirer=" + desirer + ", offerable=" + offerable + ", desirable=" + desirable + "]";
+        return "{\"id\":" + id + ",\"offerer\":{" + offerer + ",\"desirer\":{" + desirer + ",\"offerable\":" + offerable + ",\"desirable\":" + desirable + "}";
     }
 
     @Override
