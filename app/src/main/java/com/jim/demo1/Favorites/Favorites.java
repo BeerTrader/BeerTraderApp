@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
+
+import java.util.ArrayList;
 
 /**
  * Created by Jim on 5/11/2015.
@@ -20,8 +22,9 @@ public class Favorites extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favs_list);
         listView = (ListView) findViewById(R.id.myFavoritesList);
-        adapter = new Favs_Adapter(this, PersistentData.favsInventory);
+        ArrayList<Favs> test = PreferencesManager.getInstance(getApplicationContext()).getFavorites();
+        adapter = new Favs_Adapter(this, PreferencesManager.getInstance(getApplicationContext()).getFavorites());
         listView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 }

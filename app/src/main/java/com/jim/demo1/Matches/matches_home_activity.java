@@ -13,7 +13,7 @@ import com.jim.demo1.Exceptions.ObjectMappingException;
 import com.jim.demo1.Objects.Match;
 import com.jim.demo1.Objects.ObjectManager;
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpEntity;
@@ -52,7 +52,7 @@ public class matches_home_activity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                new getMatches().execute(matchesURL, PersistentData.authorization);
+                new getMatches().execute(matchesURL, PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
             }
 
         });

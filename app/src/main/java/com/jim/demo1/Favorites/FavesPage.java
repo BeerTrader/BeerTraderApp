@@ -20,7 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.jim.demo1.Post.Beer;
 import com.jim.demo1.Post.CustomAdapter;
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.RequestSingleton;
 import com.jim.demo1.Tools.Truster;
 
@@ -44,15 +44,10 @@ import java.util.ArrayList;
  * Created by Jim on 5/11/2015.
  */
 public class FavesPage extends Activity{
-    //beer
-    //brewery
 
-//    private String url1 = "https://api.untappd.com/v4/search/";
-//    private String url2 = "/?q=";
     private String url3 = "&client_id=28CF9AABA9878838EAAA37110B0B38FD6B8A3CC0&client_secret=B6DB39BF04ECFD467E7B33D129AD9E99D4DA2ABE&limit=25";
     private ArrayList<Beer> beers = new ArrayList<>();
-    private ArrayList<Favs> favs = new ArrayList<>();
-    private ArrayList styles = new ArrayList<String>();
+    private ArrayList styles = new ArrayList<>();
     private CustomAdapter adapter;
     private ArrayAdapter styleAdapter;
     public ListView listView;
@@ -92,6 +87,7 @@ public class FavesPage extends Activity{
         favsBeerButton = (Button) findViewById(R.id.FavBeer);
 
         listView.setAdapter(styleAdapter);
+        styleAdapter.notifyDataSetChanged();
         //Search Button Listener
 
 
@@ -153,7 +149,6 @@ public class FavesPage extends Activity{
                 String value = styleAdapter.getItem(position).toString();
                 Favs styleFavSelect = new Favs(value, "BEERTYPE");
                 showBrewStyleAlert(styleFavSelect);
-                //System.out.println(styleFavSelect.getFav_name());
 
                 Toast.makeText(getApplicationContext(),
                         value, Toast.LENGTH_SHORT).show();
@@ -183,8 +178,6 @@ public class FavesPage extends Activity{
                     public void onResponse(JSONObject response) {
                         try {
                             ObjectMapper objectMapper = new ObjectMapper();
-
-                            //Tree Model
 
                             JsonNode root = objectMapper.readTree(response.toString());
 
@@ -278,8 +271,7 @@ public class FavesPage extends Activity{
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
                 new POSTbeerFav().execute(postUrl, beerSelect.getBeer_name(), beerSelect.getBrewery(), beerSelect.getBeer_style());
                 Favs b = new Favs(beerSelect.getBeer_name(), "BEER");
-                favs.add(b);
-                PersistentData.favsInventory.add(b);
+                PreferencesManager.getInstance(getApplicationContext()).addFavorites(b);
 
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
 
@@ -297,6 +289,76 @@ public class FavesPage extends Activity{
         alertbox.show();
     }
 
+
+    private void showBrewStyleAlert(final Favs beerSelect) {
+
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        alertbox.setMessage("Do you want to Add This to your Favorites?");
+
+        alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub Add Beer to Inventory
+                //{"type": "BEERTYPE", "name": "PaleAle"}
+                String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
+                new POSTBrewStyleFav().execute(postUrl, beerSelect.getFav_name(), beerSelect.getFav_type());
+                Favs b = new Favs(beerSelect.getFav_name(), "BREWERY");
+                PreferencesManager.getInstance(getApplicationContext()).addFavorites(b);
+
+                Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        alertbox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // display box
+        alertbox.show();
+    }
+
+
+    class POSTBrewStyleFav extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            String url = params[0];
+            String beerName = params[1];
+            String beerType = params[2];
+            JSONObject jsonobj = new JSONObject();
+            try {
+                jsonobj.put("type", beerType);
+                jsonobj.put("name", beerName);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
+            HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                //TODO REMOVE!!!
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     class POSTbeerFav extends AsyncTask<String, Void, Void> {
         @Override
@@ -328,91 +390,7 @@ public class FavesPage extends Activity{
             HttpClient httpClient = t.getNewHttpClient();
 
             HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PersistentData.authorization);
-            try{
-                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
-                se.setContentType("application/json; charset=UTF-8");
-                httpPostReq.setEntity(se);
-            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
-            try{
-                HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                //TODO REMOVE!!!
-                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-
-    private void showBrewStyleAlert(final Favs beerSelect) {
-
-        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-
-        alertbox.setMessage("Do you want to Add This to your Favorites?");
-
-        alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub Add Beer to Inventory
-                //{"type": "BEERTYPE", "name": "PaleAle"}
-                String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
-                new POSTBrewStyleFav().execute(postUrl, beerSelect.getFav_name(), beerSelect.getFav_type());
-                Favs b = new Favs(beerSelect.getFav_name(), beerSelect.getFav_name());
-                favs.add(b);
-                PersistentData.favsInventory.add(b);
-
-                Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        alertbox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // display box
-        alertbox.show();
-    }
-
-
-    class POSTBrewStyleFav extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            String beerName = params[1];
-            String beerType = params[2];
-            //String brewery = params[3];
-            JSONObject jsonobj = new JSONObject();
-           // JSONObject jsonobj1 = new JSONObject();
-            //JSONObject jsonobj2 = new JSONObject();
-
-            JSONArray jsonarry = new JSONArray();
-            try {
-                jsonobj.put("type", beerType);
-                jsonobj.put("name", beerName);
-//                jsonobj1.put("label", "BEERTYPE");
-//                jsonobj1.put("name", beerType);
-//                jsonobj2.put("label", "BREWERY");
-//                jsonobj2.put("name", brewery);
-              //  jsonarry.put(jsonobj1);
-                //jsonarry.put(jsonobj2);
-                //jsonobj.put("relations", jsonarry);
-            } catch(JSONException e) {
-                e.printStackTrace();
-            }
-
-            Truster t = new Truster();
-            HttpClient httpClient = t.getNewHttpClient();
-
-            HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PersistentData.authorization);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
             try{
                 StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
                 se.setContentType("application/json; charset=UTF-8");

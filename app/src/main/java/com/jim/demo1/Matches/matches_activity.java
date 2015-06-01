@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.jim.demo1.MainActivity;
 import com.jim.demo1.Objects.Match;
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpEntity;
@@ -81,7 +81,7 @@ public class matches_activity extends Activity {
             @Override
             public void onClick(View arg0) {
                 matchText.setText("");
-                new ACCEPT().execute(acceptUrl, matches.get(0).toString());
+                new ACCEPT_REJECT().execute(acceptUrl, matches.get(0).toString());
                 matches.remove(0);
                 if (!matches.isEmpty()) {
                     Match match = matches.get(0);
@@ -108,7 +108,7 @@ public class matches_activity extends Activity {
             @Override
             public void onClick(View arg0) {
                 matchText.setText("");
-                new REJECT().execute(rejectURL, matches.get(0).toString());
+                new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
                 matches.remove(0);
                 if (!matches.isEmpty()) {
                     Match match = matches.get(0);
@@ -153,7 +153,7 @@ public class matches_activity extends Activity {
             alertbox.show();
     }
 
-    class ACCEPT extends AsyncTask<String, Void, Void> {
+    class ACCEPT_REJECT extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             String url = params[0];
@@ -169,45 +169,7 @@ public class matches_activity extends Activity {
             HttpClient httpClient = t.getNewHttpClient();
 
             HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PersistentData.authorization);
-            try{
-                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
-                se.setContentType("application/json; charset=UTF-8");
-                httpPostReq.setEntity(se);
-            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
-            try{
-                HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                //TODO REMOVE!!!
-                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
-                HttpEntity entity = httpResponse.getEntity();
-                String response = EntityUtils.toString(entity);
-                System.out.println(response.toString());
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    class REJECT extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            String match = params[1];
-            JSONObject jsonobj = null;
-            try {
-                jsonobj = new JSONObject(match);
-            } catch(JSONException e) {
-                e.printStackTrace();
-            }
-
-            Truster t = new Truster();
-            HttpClient httpClient = t.getNewHttpClient();
-
-            HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PersistentData.authorization);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
             try{
                 StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
                 se.setContentType("application/json; charset=UTF-8");

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.jim.demo1.Post.Beer;
 import com.jim.demo1.R;
 import com.jim.demo1.Tools.RequestSingleton;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Jim on 4/13/2015.
  */
-public class Inventory_Adapter extends BaseAdapter{
+public class Inventory_Adapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private List<Beer> inventoryList;
@@ -63,7 +64,7 @@ public class Inventory_Adapter extends BaseAdapter{
         Beer b = inventoryList.get(position);
         theBeerName.setText(b.getBeer_name());
         theBreweryName.setText(b.getBrewery());
-        mImageLoader = RequestSingleton.getInstance().getImageLoader();
+        mImageLoader = RequestSingleton.getInstance(activity.getApplicationContext()).getImageLoader();
         mImageLoader.get(b.getImgUrl(), ImageLoader.getImageListener(pic, 0, 0));
         return row;
     }

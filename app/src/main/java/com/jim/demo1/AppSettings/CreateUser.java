@@ -17,7 +17,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.jim.demo1.MainActivity;
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpEntity;
@@ -105,8 +105,8 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            PersistentData.latitude = String.valueOf(mLastLocation.getLatitude());
-            PersistentData.longitude = String.valueOf(mLastLocation.getLongitude());
+            PreferencesManager.getInstance(getApplicationContext()).saveLatitude(String.valueOf(mLastLocation.getLatitude()));
+            PreferencesManager.getInstance(getApplicationContext()).saveLongitude(String.valueOf(mLastLocation.getLongitude()));
         }
     }
 
@@ -131,8 +131,8 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 jsonobj.put("username", name);
                 jsonobj.put("password", password);
                 //TODO update these with the real long and lat
-                jsonobj.put("latitude", PersistentData.latitude);
-                jsonobj.put("longitude", PersistentData.longitude);
+                jsonobj.put("latitude", PreferencesManager.getInstance(getApplicationContext()).loadLatitude());
+                jsonobj.put("longitude", PreferencesManager.getInstance(getApplicationContext()).loadLongitude());
             } catch(JSONException e) {
                 e.printStackTrace();
             }
@@ -183,7 +183,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 if(httpResponse.getStatusLine().getStatusCode() == 200){
                     HttpEntity entity = httpResponse.getEntity();
-                    PersistentData.authorization = EntityUtils.toString(entity);
+                    PreferencesManager.getInstance(getApplicationContext()).saveAuthorization(EntityUtils.toString(entity));
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

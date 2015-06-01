@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jim.demo1.R;
-import com.jim.demo1.Tools.PersistentData;
+import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.Truster;
 
 import org.apache.http.HttpResponse;
@@ -91,7 +91,7 @@ public class add_beer_activity extends Activity{
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/offerable/addOfferable";
                 new POST().execute(postUrl, beerName.getText().toString(), beerType.getText().toString(), brewery.getText().toString());
                 Beer b = new Beer(beerName.getText().toString(), brewery.getText().toString(), beerType.getText().toString(), InvImgUrl);
-                PersistentData.beerInventory.add(b);
+                PreferencesManager.getInstance(getApplicationContext()).addInventory(b);
 
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
 
@@ -140,7 +140,7 @@ public class add_beer_activity extends Activity{
             HttpClient httpClient = t.getNewHttpClient();
 
             HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PersistentData.authorization);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
             try{
                 StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
                 se.setContentType("application/json; charset=UTF-8");
