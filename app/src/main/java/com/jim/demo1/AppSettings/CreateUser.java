@@ -130,7 +130,6 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             try {
                 jsonobj.put("username", name);
                 jsonobj.put("password", password);
-                //TODO update these with the real long and lat
                 jsonobj.put("latitude", PreferencesManager.getInstance(getApplicationContext()).loadLatitude());
                 jsonobj.put("longitude", PreferencesManager.getInstance(getApplicationContext()).loadLongitude());
             } catch(JSONException e) {
@@ -151,6 +150,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
                 if(httpResponse.getStatusLine().getStatusCode() == 200){
+                    PreferencesManager.getInstance(getApplicationContext()).saveUser(name);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

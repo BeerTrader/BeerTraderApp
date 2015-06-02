@@ -35,37 +35,65 @@ import java.util.ArrayList;
 public class matches_home_activity extends Activity {
     Button getMatchesButton;
     Button retrieveMatchesButton;
+    Button getPendingButton;
+    Button retrievePendingButton;
     final String matchesURL = "https://140.192.30.230:8443/beertrader/rest/match/getMatches";
+    final String pendingURL = "https://140.192.30.230:8443/beertrader/rest/match/getPendingOffererMatches";
+
     ArrayList<Match> matchList = new ArrayList<>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.match_home);
+        retrieveMatchesButton = (Button) findViewById(R.id.retrieveMatchesButton);
+        retrievePendingButton = (Button) findViewById(R.id.retrievePendingButton);
+        getMatchesButton = (Button) findViewById(R.id.getMatchesButton);
+        getPendingButton = (Button) findViewById(R.id.getPendingButton);
         getMatchesButton();
         retrieveMatchesButton();
+        getPendingButton();
+        retrievePendingButton();
     }
 
     private void retrieveMatchesButton() {
-        retrieveMatchesButton = (Button) findViewById(R.id.retrieveMatchesButton);
-        final Context context = this;
         retrieveMatchesButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 new getMatches().execute(matchesURL, PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
             }
+        });
+    }
 
+    private void retrievePendingButton() {
+        retrievePendingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                new getMatches().execute(pendingURL, PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            }
         });
     }
 
     private void getMatchesButton() {
-        getMatchesButton = (Button) findViewById(R.id.getMatchesButton);
         final Context context = this;
         getMatchesButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, matches_activity.class);
+                intent.putParcelableArrayListExtra("matches", matchList);
+                startActivity(intent);
+            }
+
+        });
+    }
+
+    private void getPendingButton() {
+        final Context context = this;
+        getPendingButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(context, pending_activity.class);
                 intent.putParcelableArrayListExtra("matches", matchList);
                 startActivity(intent);
             }
@@ -86,7 +114,6 @@ public class matches_home_activity extends Activity {
             httpGetReq.addHeader("Authorization", token);
             try{
                 HttpResponse httpResponse = httpClient.execute(httpGetReq);
-                //TODO REMOVE!!!
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 HttpEntity entity = httpResponse.getEntity();
                 String response = EntityUtils.toString(entity);

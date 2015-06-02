@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jim.demo1.MainActivity;
 import com.jim.demo1.Objects.Match;
 import com.jim.demo1.R;
+import com.jim.demo1.Tools.Config;
 import com.jim.demo1.Tools.PreferencesManager;
 import com.jim.demo1.Tools.Truster;
 
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Jim on 2/2/2015.
@@ -81,7 +83,19 @@ public class matches_activity extends Activity {
             @Override
             public void onClick(View arg0) {
                 matchText.setText("");
-                new ACCEPT_REJECT().execute(acceptUrl, matches.get(0).toString());
+                try{
+                    JSONObject response = new ACCEPT().execute(acceptUrl, matches.get(0).toString()).get();
+                    //save the channel
+                    //TODO the channel size is not updating correctly
+                    ArrayList<String> channels = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
+                    channels.add(response.get("channelName").toString());
+                    PreferencesManager.getInstance(getApplicationContext()).saveChannels(channels);
+                    ArrayList<String> channelstest = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
+                    //save the token
+                    Config.TOKEN = response.get("authenticationToken").toString();
+                }catch (InterruptedException e) { e.printStackTrace();}
+                catch (ExecutionException e) { e.printStackTrace();}
+                catch (JSONException e) { e.printStackTrace();}
                 matches.remove(0);
                 if (!matches.isEmpty()) {
                     Match match = matches.get(0);
@@ -108,7 +122,7 @@ public class matches_activity extends Activity {
             @Override
             public void onClick(View arg0) {
                 matchText.setText("");
-                new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
+                new REJECT().execute(rejectURL, matches.get(0).toString());
                 matches.remove(0);
                 if (!matches.isEmpty()) {
                     Match match = matches.get(0);
@@ -153,7 +167,49 @@ public class matches_activity extends Activity {
             alertbox.show();
     }
 
-    class ACCEPT_REJECT extends AsyncTask<String, Void, Void> {
+    class ACCEPT extends AsyncTask<String, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            String url = params[0];
+            String match = params[1];
+            JSONObject jsonobj = null;
+            try {
+                jsonobj = new JSONObject(match);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
+            HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
+                HttpEntity entity = httpResponse.getEntity();
+                String response = EntityUtils.toString(entity);
+                System.out.println(response.toString());
+                //TODO wont work for reject, its not a json object
+                JSONObject responseObject = new JSONObject(response);
+                return responseObject;
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    class REJECT extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             String url = params[0];
@@ -177,7 +233,6 @@ public class matches_activity extends Activity {
             } catch (UnsupportedEncodingException e) {e.printStackTrace();}
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                //TODO REMOVE!!!
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 HttpEntity entity = httpResponse.getEntity();
                 String response = EntityUtils.toString(entity);

@@ -37,7 +37,8 @@ public class TradingEntity implements Parcelable {
 
     @Override
     public String toString() {
-        return "{\"id\":" + id + ",\"label\":\"" + label + "\",\"name\":\"" + name + "\",\"relations\":" + relations +"}";
+        //return "{\"id\":" + id + ",\"label\":\"" + label + "\",\"name\":\"" + name + "\",\"relations\":" + relations +"}";
+        return "{\"id\":" + id + ",\"label\":\"" + label + "\",\"name\":" + name + ",\"relations\":" + relations +"}";
     }
 
     @Override

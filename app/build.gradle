@@ -37,4 +37,5 @@ dependencies {
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
     compile 'com.google.android.gms:play-services:7.3.0'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'co.realtime:messaging-android:2.1.34'
 }

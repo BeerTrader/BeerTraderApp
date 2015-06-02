@@ -12,14 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//public class PersistentData {
-//public static ArrayList<Beer> beerInventory = new ArrayList<>();
-//public static ArrayList<Favs> favsInventory = new ArrayList<>();
-//public static String authorization;
-//public static String latitude;
-//public static String longitude;
-//}
-
 /**
  * Created by jasekurasz on 5/30/15.
  */
@@ -81,9 +73,9 @@ public class PreferencesManager {
         return settings.getString(USER,null);
     }
 
-    public void saveUser(String novaVersao){
+    public void saveUser(String name){
         SharedPreferences.Editor e = settings.edit();
-        e.putString(USER,novaVersao);
+        e.putString(USER,name);
         e.commit();
     }
 

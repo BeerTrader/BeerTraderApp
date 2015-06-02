@@ -26,5 +26,10 @@
     <string name="AddBeer">Add Beer</string>
     <string name="Inventory">Inventory</string>
     <string name="FavesPage">favs_page</string>
+    <string name="title_activity_chat">ChatActivity</string>
+
+    <string name="send_message">SEND</string>
+    <string name="chars_num">Chars Number</string>
+    <string name="title_activity_pending_activity">pending_activity</string>
 
 </resources>

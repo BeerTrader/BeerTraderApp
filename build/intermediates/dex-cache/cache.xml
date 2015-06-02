@@ -2,11 +2,39 @@
 <items version="2" >
 
     <item
+        jar="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/classes-f8a95c1c166f6229afa80c2881a8ab06fd5c006c.jar" />
+    </item>
+    <item
+        jar="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/exploded-aar/co.realtime/messaging-android/2.1.34/libs/json_simple-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/json_simple-1.1-5efef0436dd33e1b5a313f549a0f1d538c61db09.jar" />
+    </item>
+    <item
         jar="/Users/jasekurasz/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="a60a5e993c98c864010053cb901b7eab25306568">
         <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/gson-2.2.4-7de69996419cbf7114a17c777cb0a7c785c3be6d.jar" />
+    </item>
+    <item
+        jar="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/exploded-aar/co.realtime/messaging-android/2.1.34/libs/httpcore-4.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3b7f38df6de5dd8b500e602ae8c2dd5ee446f883">
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/httpcore-4.2.4-f45b14a3d221982d8bfd1a5446c5d526ee7a6670.jar" />
+    </item>
+    <item
+        jar="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/exploded-aar/co.realtime/messaging-android/2.1.34/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="06630331a85a3a57c772c2cf7c45d483bb9e1fc1">
+        <dex dex="/Users/jasekurasz/AndroidStudioProjects/BeerTraderApp/app/build/intermediates/pre-dexed/debug/classes-6812fc48d01c16340f74008f0838171b137c6626.jar" />
     </item>
 
 </items>
