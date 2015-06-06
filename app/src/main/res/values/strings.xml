@@ -31,5 +31,6 @@
     <string name="send_message">SEND</string>
     <string name="chars_num">Chars Number</string>
     <string name="title_activity_pending_activity">pending_activity</string>
+    <string name="matches_page_title">Matches</string>
 
 </resources>
