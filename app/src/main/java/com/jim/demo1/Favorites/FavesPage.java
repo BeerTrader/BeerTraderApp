@@ -63,7 +63,7 @@ public class FavesPage extends Activity{
             "Imperial IPA", "Imperial Pilsener", "Imperial Porter", "Imperial Stout", "IPA", "Irish Ale",
             "Kellerbier", "Kölsch", "Krystal Weizen", "Lager", "Light / Lite Lager", "Marzen / Oktoberfest",
             "Mead", "Mild Ale", "Milk Stout", "Oatmeal Stout", "Old Ale", "Oyster Stout", "Pale Lager", "Porter",
-            "Rauchbier", "Reduced Alcohol", "Rye Beer", "Saison", "Schwarzbier", "Scottish Ale", "Smoked Ale",
+            "Rauchbier", "Reduced Alcohol", "Root Beer", "Rye Beer", "Saison", "Schwarzbier", "Scottish Ale", "Smoked Ale",
             "Spiced Beer", "Stout", "Strong Ale", "Strong Lager", "Unblended Lambic", "Vienna / Amber Lager",
             "Weizenbock", "Wheatwine", "Wild Ale", "Witbier",
 
@@ -76,25 +76,20 @@ public class FavesPage extends Activity{
         adapter = new CustomAdapter(this, beers);
         styleAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, styles);
         final EditText inputSearch;
-        final Button favsStylesButton;
-        final Button favsBreweryButton;
-        final Button favsBeerButton;
+        final Button StylesButton;
+        final Button BreweryButton;
+        final Button BeerButton;
 
 
         inputSearch = (EditText) findViewById(R.id.editText);
-        favsStylesButton = (Button) findViewById(R.id.FavStyle);
-        favsBreweryButton = (Button) findViewById(R.id.FavBrewery);
-        favsBeerButton = (Button) findViewById(R.id.FavBeer);
+        StylesButton = (Button) findViewById(R.id.FavStyle);
+        BreweryButton = (Button) findViewById(R.id.FavBrewery);
+        BeerButton = (Button) findViewById(R.id.FavBeer);
 
         listView.setAdapter(styleAdapter);
         styleAdapter.notifyDataSetChanged();
-        //Search Button Listener
 
-
-
-       favsBeerButton.setOnClickListener(new View.OnClickListener() {
-
-
+        BeerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 beers.clear();
@@ -106,17 +101,14 @@ public class FavesPage extends Activity{
                         Beer beerSelect = new Beer (beers.get(position).getBeer_name(),
                                 beers.get(position).getBrewery(), beers.get(position).getBeer_style(),
                                 beers.get(position).getImgUrl());
-                        //favs.add(beerSelect);
-                        //PersistentData.favsInventory.add(beerSelect);
                         showBeerAlert(beerSelect);
                         Toast.makeText(getApplicationContext(),
                                 (CharSequence) beers.get(position).getBeer_name(), Toast.LENGTH_SHORT).show();                    }
                 });
             }
-
         });
 
-        favsBreweryButton.setOnClickListener(new View.OnClickListener() {
+        BreweryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 beers.clear();
@@ -126,8 +118,7 @@ public class FavesPage extends Activity{
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Favs breweryFavSelect = new Favs((beers.get(position).getBeer_name()), "BREWERY");
-                        showBrewStyleAlert(breweryFavSelect);
-
+                        showBreweryAlert(breweryFavSelect);
                         Toast.makeText(getApplicationContext(),
                                 (CharSequence) beers.get(position).getBeer_name(), Toast.LENGTH_SHORT).show();
                     }
@@ -136,39 +127,32 @@ public class FavesPage extends Activity{
 
         });
 
-        favsStylesButton.setOnClickListener(new View.OnClickListener() {
+        StylesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 beers.clear();
-                getStyles(inputSearch.getText().toString());
+                getStyles();
+                listView.setAdapter(styleAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String value = styleAdapter.getItem(position).toString();
+                        Favs styleFavSelect = new Favs(value, "BEERTYPE");
+                        showStyleAlert(styleFavSelect);
+                        Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String value = styleAdapter.getItem(position).toString();
-                Favs styleFavSelect = new Favs(value, "BEERTYPE");
-                showBrewStyleAlert(styleFavSelect);
-
-                Toast.makeText(getApplicationContext(),
-                        value, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
     }
 
-    private void getStyles(String s) {
+    private void getStyles() {
         styles.clear();
         for(int i = 0; i < list_items.length; i++){
-            if(list_items[i].contains(s)){
-                styles.add(list_items[i]);
-            }
+            styles.add(list_items[i]);
         }
         styleAdapter.notifyDataSetChanged();
-
     }
-
 
     public void getBeers(String searchText) {
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -262,19 +246,16 @@ public class FavesPage extends Activity{
 
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 
-        alertbox.setMessage("Do you want to Add This Beer to your Favorites?");
+        alertbox.setMessage("Do you want to add this Beer to your Favorites?");
 
         alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub Add Beer to Inventory
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
-                new POSTbeerFav().execute(postUrl, beerSelect.getBeer_name(), beerSelect.getBrewery(), beerSelect.getBeer_style());
+                new POSTBeerFav().execute(postUrl, beerSelect.getBeer_name(), beerSelect.getBrewery(), beerSelect.getBeer_style());
                 Favs b = new Favs(beerSelect.getBeer_name(), "BEER");
                 PreferencesManager.getInstance(getApplicationContext()).addFavorites(b);
-
                 Toast.makeText(getApplicationContext(), "Beer Added", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -289,25 +270,20 @@ public class FavesPage extends Activity{
         alertbox.show();
     }
 
-
-    private void showBrewStyleAlert(final Favs beerSelect) {
+    private void showBreweryAlert(final Favs beerSelect) {
 
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 
-        alertbox.setMessage("Do you want to Add This to your Favorites?");
+        alertbox.setMessage("Do you want to add this brewery to your Favorites?");
 
         alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub Add Beer to Inventory
-                //{"type": "BEERTYPE", "name": "PaleAle"}
                 String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
-                new POSTBrewStyleFav().execute(postUrl, beerSelect.getFav_name(), beerSelect.getFav_type());
+                new POSTBreweryFav().execute(postUrl, beerSelect.getFav_name());
                 Favs b = new Favs(beerSelect.getFav_name(), "BREWERY");
                 PreferencesManager.getInstance(getApplicationContext()).addFavorites(b);
-
                 Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -317,50 +293,36 @@ public class FavesPage extends Activity{
                 Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
             }
         });
-
-        // display box
         alertbox.show();
     }
 
+    private void showStyleAlert(final Favs beerSelect) {
 
-    class POSTBrewStyleFav extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            String beerName = params[1];
-            String beerType = params[2];
-            JSONObject jsonobj = new JSONObject();
-            try {
-                jsonobj.put("type", beerType);
-                jsonobj.put("name", beerName);
-            } catch(JSONException e) {
-                e.printStackTrace();
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        alertbox.setMessage("Do you want to add this style to your Favorites?");
+
+        alertbox.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface arg0, int arg1) {
+                String postUrl = "https://140.192.30.230:8443/beertrader/rest/desirable/addDesirable";
+                new POSTStyleFav().execute(postUrl, beerSelect.getFav_name());
+                Favs b = new Favs(beerSelect.getFav_name(), "BEERTYPE");
+                PreferencesManager.getInstance(getApplicationContext()).addFavorites(b);
+                Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
             }
+        });
 
-            Truster t = new Truster();
-            HttpClient httpClient = t.getNewHttpClient();
+        alertbox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-            HttpPost httpPostReq = new HttpPost(url);
-            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
-            try{
-                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
-                se.setContentType("application/json; charset=UTF-8");
-                httpPostReq.setEntity(se);
-            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
-            try{
-                HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                //TODO REMOVE!!!
-                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
             }
-            return null;
-        }
+        });
+        alertbox.show();
     }
 
-    class POSTbeerFav extends AsyncTask<String, Void, Void> {
+    class POSTBeerFav extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             String url = params[0];
@@ -409,6 +371,77 @@ public class FavesPage extends Activity{
         }
     }
 
+    class POSTBreweryFav extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            String url = params[0];
+            String breweryName = params[1];
+            JSONObject jsonobj = new JSONObject();
+            try {
+                jsonobj.put("type", "BREWERY");
+                jsonobj.put("name", breweryName);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
+            HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                //TODO REMOVE!!!
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    class POSTStyleFav extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+            String url = params[0];
+            String StyleName = params[1];
+            JSONObject jsonobj = new JSONObject();
+            try {
+                jsonobj.put("type", "BEERTYPE");
+                jsonobj.put("name", StyleName);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+
+            HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                //TODO REMOVE!!!
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 }
 
