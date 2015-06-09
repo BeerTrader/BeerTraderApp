@@ -66,8 +66,6 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new SignUp().execute(signUpURL, uName, uPwd);
-               // textview.setText("Username or Password Not Allowed");
-
             }
 
         });
@@ -78,9 +76,6 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new Login().execute(loginURL, uName, uPwd);
-                //textview.setText("Invalid Username or Password");
-
-
             }
         });
 
@@ -130,10 +125,15 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             try {
                 jsonobj.put("username", name);
                 jsonobj.put("password", password);
+
+                //For demo since emulator does not have location services, uncomment after testing
                 //jsonobj.put("latitude", PreferencesManager.getInstance(getApplicationContext()).loadLatitude());
                 //jsonobj.put("longitude", PreferencesManager.getInstance(getApplicationContext()).loadLongitude());
+
+                //For demo since emulator does not have location services, comment out after testing
                 jsonobj.put("latitude", "41.909909909909906");
                 jsonobj.put("longitude", "-87.66943241842068");
+
             } catch(JSONException e) {
                 e.printStackTrace();
             }
@@ -153,8 +153,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
                 if(httpResponse.getStatusLine().getStatusCode() == 200){
                     PreferencesManager.getInstance(getApplicationContext()).saveUser(name);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    new Login().execute(loginURL, name, password);
                 }
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -181,20 +180,19 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             httpGetReq.addHeader("Authorization", "Basic " + encode);
             try{
                 HttpResponse httpResponse = httpClient.execute(httpGetReq);
-                //TODO REMOVE!!!
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 if(httpResponse.getStatusLine().getStatusCode() == 200){
                     HttpEntity entity = httpResponse.getEntity();
                     PreferencesManager.getInstance(getApplicationContext()).saveAuthorization(EntityUtils.toString(entity));
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
                 }
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
-
             }
             return null;
         }

@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -85,9 +86,6 @@ public class matches_activity extends Activity {
         Intent intent = getIntent();
         matches = intent.getParcelableArrayListExtra("matches");
         matchFix(matches);
-
-
-
         arrayAdapter = new ArrayAdapter<>(this, R.layout.matches_item, R.id.MatchOffer, matchString );
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -105,26 +103,27 @@ public class matches_activity extends Activity {
             @Override
             public void onLeftCardExit(Object dataObject) {
                 final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
-                new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
-
+                new REJECT().execute(rejectURL, matches.get(0).toString());
                 arrayAdapter.notifyDataSetChanged();
             }
-
-
 
             @Override
             public void onRightCardExit(Object dataObject)
             {
                 final String acceptUrl = "https://140.192.30.230:8443/beertrader/rest/match/acceptMatch";
-
-                new ACCEPT_REJECT().execute(acceptUrl, matches.get(0).toString());
-                matches.remove(0);
-                matchString.remove(0);
+                try{
+                    JSONObject response = new ACCEPT().execute(acceptUrl, matches.get(0).toString()).get();
+                    ArrayList<String> channels = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
+                    channels.add(response.get("channelName").toString());
+                    PreferencesManager.getInstance(getApplicationContext()).saveChannels(channels);
+                }catch (InterruptedException e) { e.printStackTrace();}
+                catch (ExecutionException e) { e.printStackTrace();}
+                catch (JSONException e) { e.printStackTrace();}
+                //matches.remove(0);
+                //matchString.remove(0);
                 arrayAdapter.notifyDataSetChanged();
 
             }
-
-
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
@@ -146,22 +145,27 @@ public class matches_activity extends Activity {
 
     @OnClick(R.id.right)
     public void right() {
-
         flingContainer.getTopCardListener().selectRight();
         final String acceptUrl = "https://140.192.30.230:8443/beertrader/rest/match/acceptMatch";
-
-        new ACCEPT_REJECT().execute(acceptUrl, matches.get(0).toString());
+        try{
+            JSONObject response = new ACCEPT().execute(acceptUrl, matches.get(0).toString()).get();
+            ArrayList<String> channels = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
+            channels.add(response.get("channelName").toString());
+            PreferencesManager.getInstance(getApplicationContext()).saveChannels(channels);
+        }catch (InterruptedException e) { e.printStackTrace();}
+        catch (ExecutionException e) { e.printStackTrace();}
+        catch (JSONException e) { e.printStackTrace();}
+        //matches.remove(0);
+        //matchString.remove(0);
         arrayAdapter.notifyDataSetChanged();
 
     }
 
     @OnClick(R.id.left)
     public void left() {
-
         flingContainer.getTopCardListener().selectLeft();
         final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
-        new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
-
+        new REJECT().execute(rejectURL, matches.get(0).toString());
         arrayAdapter.notifyDataSetChanged();
     }
 
@@ -191,7 +195,45 @@ public class matches_activity extends Activity {
         alertbox.show();
     }
 
-    class ACCEPT_REJECT extends AsyncTask<String, Void, Void> {
+    class ACCEPT extends AsyncTask<String, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            String url = params[0];
+            String match = params[1];
+            JSONObject jsonobj = null;
+            try {
+                jsonobj = new JSONObject(match);
+            } catch(JSONException e) {e.printStackTrace();}
+
+            Truster t = new Truster();
+            HttpClient httpClient = t.getNewHttpClient();
+            HttpPost httpPostReq = new HttpPost(url);
+            httpPostReq.setHeader("Authorization", PreferencesManager.getInstance(getApplicationContext()).loadAuthorization());
+            try{
+                StringEntity se = new StringEntity(jsonobj.toString(), "UTF-8");
+                se.setContentType("application/json; charset=UTF-8");
+                httpPostReq.setEntity(se);
+            } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            try{
+                HttpResponse httpResponse = httpClient.execute(httpPostReq);
+                System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
+                HttpEntity entity = httpResponse.getEntity();
+                String response = EntityUtils.toString(entity);
+                System.out.println(response.toString());
+                JSONObject responseObject = new JSONObject(response);
+                return responseObject;
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    class REJECT extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             String url = params[0];
@@ -215,7 +257,6 @@ public class matches_activity extends Activity {
             } catch (UnsupportedEncodingException e) {e.printStackTrace();}
             try{
                 HttpResponse httpResponse = httpClient.execute(httpPostReq);
-                //TODO REMOVE!!!
                 System.out.println("Status Code = " + httpResponse.getStatusLine().getStatusCode());
                 HttpEntity entity = httpResponse.getEntity();
                 String response = EntityUtils.toString(entity);

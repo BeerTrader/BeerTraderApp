@@ -85,11 +85,9 @@ public class pending_activity extends Activity {
                 try{
                     JSONObject response = new ACCEPT().execute(acceptUrl, matches.get(0).toString()).get();
                     //save the channel
-                    //TODO the channel size is not updating correctly
                     ArrayList<String> channels = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
                     channels.add(response.get("channelName").toString());
                     PreferencesManager.getInstance(getApplicationContext()).saveChannels(channels);
-                    ArrayList<String> channelstest = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
                     //save the token
                     Config.TOKEN = response.get("authenticationToken").toString();
                 }catch (InterruptedException e) { e.printStackTrace();}
@@ -194,7 +192,6 @@ public class pending_activity extends Activity {
                 HttpEntity entity = httpResponse.getEntity();
                 String response = EntityUtils.toString(entity);
                 System.out.println(response.toString());
-                //TODO wont work for reject, its not a json object
                 JSONObject responseObject = new JSONObject(response);
                 return responseObject;
             } catch (ClientProtocolException e) {
