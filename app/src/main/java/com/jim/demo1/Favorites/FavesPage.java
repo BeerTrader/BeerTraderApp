@@ -327,8 +327,8 @@ public class FavesPage extends Activity{
         protected Void doInBackground(String... params) {
             String url = params[0];
             String beerName = params[1];
-            String beerType = params[2];
-            String brewery = params[3];
+            String brewery = params[2];
+            String beerType = params[3];
             JSONObject jsonobj = new JSONObject();
             JSONObject jsonobj1 = new JSONObject();
             JSONObject jsonobj2 = new JSONObject();
@@ -378,7 +378,7 @@ public class FavesPage extends Activity{
             String breweryName = params[1];
             JSONObject jsonobj = new JSONObject();
             try {
-                jsonobj.put("type", "BREWERY");
+                jsonobj.put("label", "BREWERY");
                 jsonobj.put("name", breweryName);
             } catch(JSONException e) {
                 e.printStackTrace();
@@ -414,8 +414,9 @@ public class FavesPage extends Activity{
             String StyleName = params[1];
             JSONObject jsonobj = new JSONObject();
             try {
-                jsonobj.put("type", "BEERTYPE");
-                jsonobj.put("name", StyleName);
+                jsonobj.put("label", "BEERTYPE");
+                jsonobj.put("name", "\"" + StyleName + "\"");
+                System.out.println("josn object " + jsonobj.toString());
             } catch(JSONException e) {
                 e.printStackTrace();
             }
