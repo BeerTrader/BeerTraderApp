@@ -40,6 +40,7 @@ import butterknife.OnClick;
 public class matches_activity extends Activity {
 
     ArrayList<Match> matches = new ArrayList<>();
+ //   ArrayList<Match> matches2 = new ArrayList<>();
     ArrayList<String> matchString = new ArrayList<>();
     private ArrayAdapter<String> arrayAdapter;
     String offerer;
@@ -57,22 +58,46 @@ public class matches_activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.matches_layout);
         ButterKnife.inject(this);
-
+//        matches2.add(new Match(
+//                1433610846,
+//                (new User((long) 1433610846, "jim2", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new User((long) 1433550221, "jim3", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new TradingEntity(1433610630, "BEER", "Blue Moon", null)),
+//                (new TradingEntity(1433610631, "NAME", "Belgium White", null))));
+//        matches2.add(new Match(
+//                1433610847,
+//                (new User((long) 1433610846, "jim2", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new User((long) 1433550221, "jim3", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new TradingEntity(1433610630, "BEER", "Three Floyds", null)),
+//                (new TradingEntity(1433610631, "NAME", "Alpha King", null))));
+//        matches2.add(new Match(
+//                1433610848,
+//                (new User((long) 1433610846, "jim2", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new User((long) 1433550221, "jim3", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new TradingEntity(1433610630, "BEER", "Coors", null)),
+//                (new TradingEntity(1433610631, "NAME", "Coors Light", null))));
+//        matches2.add(new Match(
+//                1433610849,
+//                (new User((long) 1433610846, "jim2", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new User((long) 1433550221, "jim3", "yes", 41.909909909909906, -87.66943241842068)),
+//                (new TradingEntity(1433610630, "BEER", "Lagunitas", null)),
+//                (new TradingEntity(1433610631, "NAME", "IPA", null))));
         Intent intent = getIntent();
         matches = intent.getParcelableArrayListExtra("matches");
         matchFix(matches);
 
-        System.out.println(matches.get(0).toString());
+
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.matches_item, R.id.MatchOffer, matchString );
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            int theMatch = matches.size();
             @Override
             public void removeFirstObjectInAdapter() {
                 Log.d("LIST", "removed object!");
-//                System.out.println(matches.get(0).toString());
-                matches.remove(0);
-                matchString.remove(0);
+//                matches.remove(0);
+//                matchString.remove(0);
+                matches.get(0);
                 arrayAdapter.notifyDataSetChanged();
 
             }
@@ -81,8 +106,7 @@ public class matches_activity extends Activity {
             public void onLeftCardExit(Object dataObject) {
                 final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
                 new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
-                matches.remove(0);
-                matchString.remove(0);
+
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -97,6 +121,7 @@ public class matches_activity extends Activity {
                 matches.remove(0);
                 matchString.remove(0);
                 arrayAdapter.notifyDataSetChanged();
+
             }
 
 
@@ -105,9 +130,7 @@ public class matches_activity extends Activity {
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 if(itemsInAdapter == 0){
                     showAlert2();
-
                 }
-
             }
 
             @Override
@@ -128,8 +151,8 @@ public class matches_activity extends Activity {
         final String acceptUrl = "https://140.192.30.230:8443/beertrader/rest/match/acceptMatch";
 
         new ACCEPT_REJECT().execute(acceptUrl, matches.get(0).toString());
-        matches.remove(0);
-        matchString.remove(0);
+        arrayAdapter.notifyDataSetChanged();
+
     }
 
     @OnClick(R.id.left)
@@ -138,13 +161,11 @@ public class matches_activity extends Activity {
         flingContainer.getTopCardListener().selectLeft();
         final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
         new ACCEPT_REJECT().execute(rejectURL, matches.get(0).toString());
-        matches.remove(0);
-        matchString.remove(0);
+
         arrayAdapter.notifyDataSetChanged();
     }
 
     private void showAlert2() {
-
         final Context context = this;
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 

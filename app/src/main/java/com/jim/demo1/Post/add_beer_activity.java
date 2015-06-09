@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by Jim on 4/7/2015.
@@ -68,9 +69,16 @@ public class add_beer_activity extends Activity{
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
+        String imgUrl = intent.getCharSequenceExtra("imgUrl").toString().split("https://d1c8v1qci5en44", 2)[1];
+        System.out.println(imgUrl);
         if (intent != null) {
-            String imgUrl = intent.getCharSequenceExtra("imgUrl").toString();
-            InvImgUrl = imgUrl;
+            String imgUrl2 = null;
+            try {
+                imgUrl2 = "https://" + URLEncoder.encode("d1c8v1qci5en44", "UTF-8") + imgUrl;
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            InvImgUrl = imgUrl2;
             beerName.setText(intent.getCharSequenceExtra("beerName"));
             brewery.setText(intent.getCharSequenceExtra("brewery"));
             beerType.setText(intent.getCharSequenceExtra("beerType"));

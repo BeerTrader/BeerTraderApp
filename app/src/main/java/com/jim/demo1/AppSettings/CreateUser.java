@@ -66,7 +66,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new SignUp().execute(signUpURL, uName, uPwd);
-                textview.setText("Username or Password Not Allowed");
+               // textview.setText("Username or Password Not Allowed");
 
             }
 
@@ -78,7 +78,7 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
                 String uName = textName.getText().toString();
                 String uPwd = textPwd.getText().toString();
                 new Login().execute(loginURL, uName, uPwd);
-                textview.setText("Invalid Username or Password");
+                //textview.setText("Invalid Username or Password");
 
 
             }
