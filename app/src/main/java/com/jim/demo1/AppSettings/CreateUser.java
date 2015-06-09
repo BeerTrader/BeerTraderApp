@@ -130,8 +130,10 @@ public class CreateUser extends Activity implements GoogleApiClient.ConnectionCa
             try {
                 jsonobj.put("username", name);
                 jsonobj.put("password", password);
-                jsonobj.put("latitude", PreferencesManager.getInstance(getApplicationContext()).loadLatitude());
-                jsonobj.put("longitude", PreferencesManager.getInstance(getApplicationContext()).loadLongitude());
+                //jsonobj.put("latitude", PreferencesManager.getInstance(getApplicationContext()).loadLatitude());
+                //jsonobj.put("longitude", PreferencesManager.getInstance(getApplicationContext()).loadLongitude());
+                jsonobj.put("latitude", "41.909909909909906");
+                jsonobj.put("longitude", "-87.66943241842068");
             } catch(JSONException e) {
                 e.printStackTrace();
             }
