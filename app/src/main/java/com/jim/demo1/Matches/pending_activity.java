@@ -55,6 +55,7 @@ public class pending_activity extends Activity {
         setRejectBtn();
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -62,12 +63,16 @@ public class pending_activity extends Activity {
         if (intent != null) {
             matchText = (TextView) findViewById(R.id.offerer);
             matches = intent.getParcelableArrayListExtra("matches");
-            Match match = matches.get(0);
-            offerer = match.getOfferer().getUsername().toString();
-            desirer = match.getDesirer().getUsername().toString();
-            offerable = match.getOfferable().getName().toString();
-            desirable = match.getDesirable().getName().toString();
-            matchText.setText(offerer + " is offering " + offerable + " and " + desirer + " wants " + desirable);
+            if(matches.size() == 0) {
+                showAlert2();
+            }else{
+                Match match = matches.get(0);
+                offerer = match.getOfferer().getUsername().toString();
+                desirer = match.getDesirer().getUsername().toString();
+                offerable = match.getOfferable().getName().toString();
+                desirable = match.getDesirable().getName().toString();
+                matchText.setText(offerer + " is offering " + offerable + " and " + desirer + " wants " + desirable);
+            }
         }
         else{
             showAlert2();
@@ -159,7 +164,6 @@ public class pending_activity extends Activity {
                 startActivity(intent);
             }
         });
-
         // display box
         alertbox.show();
     }
