@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
     <ListView
         android:id="@+id/myFavoritesList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:choiceMode="multipleChoice"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
     </ListView>
 
     <!--<Button-->

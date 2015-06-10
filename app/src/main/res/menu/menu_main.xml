@@ -5,6 +5,5 @@
         android:title="@string/app_name"
         android:icon="@drawable/phonemug"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        />
+                />
 </menu>

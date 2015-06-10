@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
 
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <ImageView
             android:layout_width="80dp"
@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
             android:text="@string/beerName"
             android:textColor="#ff000000"
             android:textSize="16sp"
-            android:background="#fffff52e" />
+            android:background="#ffffffff" />
 
     </LinearLayout>
 
@@ -45,7 +45,7 @@
         android:layout_height="50dp"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:text="@string/brewery"
             android:textColor="#ff000000"
             android:textSize="16sp"
-            android:background="#fffff52e" />
+            android:background="#ffffffff" />
 
     </LinearLayout>
 
@@ -63,16 +63,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/beerType"
             android:text="@string/beerType"
-            android:textColor="#fffff52e"
+            android:textColor="#ff000000"
             android:textSize="16sp"
-            android:background="#fffff52e" />
+            android:background="#ffffffff" />
 
     </LinearLayout>
 
@@ -82,7 +82,7 @@
         android:text="Add Beer"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffffff" />
+        android:textColor="#ff000000" />
 
     <Button
         android:layout_width="wrap_content"

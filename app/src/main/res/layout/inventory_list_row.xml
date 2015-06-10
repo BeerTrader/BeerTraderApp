@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
     <ImageView
         android:id="@+id/inventoryLablePic"
@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <TextView
             android:layout_width="100dp"
@@ -22,7 +22,7 @@
             android:id="@+id/inventoryBeerName"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:background="#fffff52e"
+            android:background="#ffffffff"
             android:textColor="#ff000000" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#ff000000"
-            android:background="#fffff52e" />
+            android:background="#ffffffff" />
 
     </LinearLayout>
 

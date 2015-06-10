@@ -5,7 +5,7 @@
     android:layout_marginTop="50dp"
     android:layout_width="240dp"
     android:layout_height="200dp"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
     <TextView
         android:id="@+id/MatchOffer"

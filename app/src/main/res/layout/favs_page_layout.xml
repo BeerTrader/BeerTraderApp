@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:layout_centerHorizontal="true"
         android:hint="Search"
-        android:background="#fffff52e"
+        android:background="#ffffffff"
         android:textColor="#ff000000" />
 
     <Button
@@ -51,7 +51,7 @@
         android:id="@+id/addFavsListView"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/FavStyle"
-        android:background="#fffff52e" />
+        android:background="#ffffffff" />
 
 
 

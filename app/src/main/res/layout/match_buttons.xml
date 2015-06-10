@@ -6,7 +6,7 @@
     android:layout_marginBottom="20dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#eefeeb29">
+    android:background="#ffffffff">
 
     <ImageButton
         android:id="@+id/left"

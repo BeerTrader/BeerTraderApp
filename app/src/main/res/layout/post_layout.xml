@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
 
     <EditText
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/beerSearchText"
         android:layout_gravity="left"
-        android:background="#fffff52e"
+        android:background="#ffffffff"
         android:textColor="#ff000000" />
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
     </ListView>
 

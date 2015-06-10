@@ -3,14 +3,14 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.78"
-        android:background="#fffff52e">
+        android:background="#ffffffff">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
             android:id="@+id/FavItemName"
-            android:background="#fffff52e"
+            android:background="#ffffffff"
             android:textColor="#ff000000" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:text="Medium Text"
             android:id="@+id/favItemType"
             android:textColor="#ff000000"
-            android:background="#fffff52e" />
+            android:background="#ffffffff" />
 
     </LinearLayout>
 

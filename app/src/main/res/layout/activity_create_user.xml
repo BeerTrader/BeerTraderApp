@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fffff52e">
+    android:background="#ffffffff">
 
 
     <EditText
@@ -15,7 +15,7 @@
         android:id="@+id/loginName"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="10dp"
-        android:background="#fffff52e"
+        android:background="#ffffffff"
         android:textColor="#ff000000" />
 
     <EditText
@@ -28,7 +28,7 @@
         android:id="@+id/loginPwd"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="10dp"
-        android:background="#fffff52e"
+        android:background="#ffffffff"
         android:textColor="#ff000000"/>
 
     <LinearLayout
