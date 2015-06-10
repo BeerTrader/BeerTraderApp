@@ -14,7 +14,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white" />
+        android:textColor="#ff000000"
+        android:background="#fffff52e" />
 
     <com.jim.demo1.lorentzos.SwipeFlingAdapterView
         android:id="@+id/frame"

@@ -2,26 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fffff52e">
 
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/beerSearchText"
-        android:layout_gravity="left" />
+        android:layout_gravity="left"
+        android:background="#fffff52e"
+        android:textColor="#ff000000" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Beers"
         android:id="@+id/searchBeersButton"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list">
+        android:id="@+id/list"
+        android:background="#fffff52e">
 
     </ListView>
 

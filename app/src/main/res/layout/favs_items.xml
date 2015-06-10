@@ -2,27 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#fffff52e">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.78">
+        android:layout_weight="0.78"
+        android:background="#fffff52e">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/FavItemName" />
+            android:id="@+id/FavItemName"
+            android:background="#fffff52e"
+            android:textColor="#ff000000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/favItemType" />
+            android:id="@+id/favItemType"
+            android:textColor="#ff000000"
+            android:background="#fffff52e" />
 
     </LinearLayout>
 
@@ -30,6 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:id="@+id/button" />
+        android:id="@+id/button"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
 </LinearLayout>

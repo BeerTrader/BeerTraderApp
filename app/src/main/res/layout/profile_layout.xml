@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:weightSum="1"
-    android:background="#ffffffff">
+    android:background="#fffff52e">
 
 
     <ImageView
@@ -16,7 +16,8 @@
         android:layout_marginTop="42dp"
         android:src="@drawable/duff"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +26,8 @@
         android:text="@string/profileName"
         android:id="@+id/userName"
         android:layout_below="@+id/userPicture"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffffff" />
 
     <Button
         android:layout_width="fill_parent"
@@ -34,7 +36,10 @@
         android:id="@+id/profileAppSettingsButton"
         android:layout_below="@+id/userName"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
     <Button
         android:layout_width="fill_parent"
@@ -42,7 +47,10 @@
         android:text="Inventory"
         android:id="@+id/InventoryButton"
         android:layout_below="@+id/profileAppSettingsButton"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
     <Button
         android:layout_width="fill_parent"
@@ -50,7 +58,10 @@
         android:text="@string/contact_text"
         android:id="@+id/profileContactButton"
         android:layout_below="@+id/InventoryButton"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
     <Button
         android:layout_width="fill_parent"
@@ -58,6 +69,9 @@
         android:text="Share BeerTrader"
         android:id="@+id/profileShareButton"
         android:layout_below="@+id/profileContactButton"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton" />
 
 </RelativeLayout>

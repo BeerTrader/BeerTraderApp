@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fffff52e">
 
     <ImageView
         android:id="@+id/lablePic"
@@ -13,21 +14,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#fffff52e">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/beerName"
             android:textStyle="bold"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="#ff000000"
+            android:background="#fffff52e" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/brewery"
             android:textStyle="bold"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="#ff000000"
+            android:background="#fffff52e" />
 
     </LinearLayout>
 

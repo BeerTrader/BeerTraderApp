@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="50dp"
+    android:background="#fffff52e">
 
     <Button
         android:layout_width="fill_parent"
@@ -9,7 +11,10 @@
         android:text="Add To Favorites"
         android:id="@+id/addToFavoritesButton"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -17,7 +22,10 @@
         android:text="My Favorites"
         android:id="@+id/myFavoritesButton"
         android:layout_below="@+id/addToFavoritesButton"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton"/>
 
 
 </RelativeLayout>

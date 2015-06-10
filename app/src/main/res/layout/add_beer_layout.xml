@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fffff52e">
 
 
 
@@ -10,13 +11,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="#fffff52e">
 
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/InvLablePic"
-            android:padding="4dp"/>
+            android:padding="4dp" />
 
     </LinearLayout>
 
@@ -24,15 +26,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="#fffff52e">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/beerName"
             android:text="@string/beerName"
-            android:textColor="#808080"
-            android:textSize="16sp"/>
+            android:textColor="#ff000000"
+            android:textSize="16sp"
+            android:background="#fffff52e" />
 
     </LinearLayout>
 
@@ -40,15 +44,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="#fffff52e">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/brewery"
             android:text="@string/brewery"
-            android:textColor="#808080"
-            android:textSize="16sp"/>
+            android:textColor="#ff000000"
+            android:textSize="16sp"
+            android:background="#fffff52e" />
 
     </LinearLayout>
 
@@ -56,15 +62,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="#fffff52e">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/beerType"
             android:text="@string/beerType"
-            android:textColor="#808080"
-            android:textSize="16sp"/>
+            android:textColor="#fffff52e"
+            android:textSize="16sp"
+            android:background="#fffff52e" />
 
     </LinearLayout>
 
@@ -73,12 +81,16 @@
         android:layout_height="wrap_content"
         android:text="Add Beer"
         android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
-
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imageButton"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/add128" />
+        android:textColor="#ffffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:text="Add Beer"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_button"
+        android:textColor="@android:color/white"
+        style="@android:style/DeviceDefault.SegmentedButton"/>
 </LinearLayout>

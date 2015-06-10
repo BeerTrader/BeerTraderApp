@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +33,7 @@ import java.net.URLEncoder;
  */
 public class add_beer_activity extends Activity{
 
-    ImageButton addBeerButton;
+    Button addBeerButton;
     private String InvImgUrl;
     private TextView beerName;
     private TextView brewery;
@@ -52,7 +52,7 @@ public class add_beer_activity extends Activity{
 
     private void addListenerOnButton() {
 
-        addBeerButton = (ImageButton) findViewById(R.id.imageButton);
+        addBeerButton = (Button) findViewById(R.id.imageButton);
 
         addBeerButton.setOnClickListener(new View.OnClickListener() {
 

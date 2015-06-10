@@ -14,7 +14,7 @@
     <string name="login">LOGIN</string>
     <string name="app_settings_title_text">NOTIFICATIONS</string>
     <string name="profile_app_settings_button">Favorites</string>
-    <string name="contact_text">Contact BeerTrader</string>
+    <string name="contact_text"><M>MESSAGES</M></string>
     <string name="submit">SUBMIT</string>
     <string name="title_activity_create_user">Home</string>
 
