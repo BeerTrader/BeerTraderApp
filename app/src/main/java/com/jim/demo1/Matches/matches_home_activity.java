@@ -78,6 +78,7 @@ public class matches_home_activity extends Activity {
 
             @Override
             public void onClick(View arg0) {
+                System.out.println("Inside Matches Home Activity " + matchList.size());
                 Intent intent = new Intent(context, matches_activity.class);
                 intent.putParcelableArrayListExtra("matches", matchList);
                 startActivity(intent);
@@ -122,10 +123,13 @@ public class matches_home_activity extends Activity {
                 final JSONArray matches = obj.getJSONArray("matchList");
                 final int n = matches.length();
                 for (int i = 0; i < n; ++i) {
+                    System.out.println("i is " + i);
+
                     final JSONObject object = matches.getJSONObject(i);
                     try{
                         Match match = (Match) ObjectManager.readObjectAsString(object.toString(), Match.class);
                         matchList.add(match);
+                        System.out.println("i is " + i);
                     } catch(ObjectMappingException e) { e.printStackTrace();}
                 }
             } catch (ClientProtocolException e) {

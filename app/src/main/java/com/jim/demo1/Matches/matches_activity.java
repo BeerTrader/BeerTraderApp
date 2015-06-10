@@ -86,16 +86,20 @@ public class matches_activity extends Activity {
         Intent intent = getIntent();
         matches = intent.getParcelableArrayListExtra("matches");
         matchFix(matches);
+        System.out.println("Matches Size IS " + matches.size());
         arrayAdapter = new ArrayAdapter<>(this, R.layout.matches_item, R.id.MatchOffer, matchString );
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            int theMatch = matches.size();
+//            int theMatch = matches.size();
             @Override
             public void removeFirstObjectInAdapter() {
                 Log.d("LIST", "removed object!");
-//                matches.remove(0);
-//                matchString.remove(0);
-                matches.get(0);
+//                matches.remove(0).toString();
+//                matchString.get(0);
+//                matches.get(0);
+
+                matchString.remove(0);
+
                 arrayAdapter.notifyDataSetChanged();
 
             }
@@ -104,13 +108,18 @@ public class matches_activity extends Activity {
             public void onLeftCardExit(Object dataObject) {
                 final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
                 new REJECT().execute(rejectURL, matches.get(0).toString());
-                arrayAdapter.notifyDataSetChanged();
+                System.out.println("matches in LCE is size " + matches.size());
+//                matches.remove(0);
+//                matchString.remove(0);
+                //remove();
             }
 
             @Override
             public void onRightCardExit(Object dataObject)
             {
                 final String acceptUrl = "https://140.192.30.230:8443/beertrader/rest/match/acceptMatch";
+                System.out.println(dataObject.toString());
+                System.out.println("The Match(0) is " + matches.get(0).toString());
                 try{
                     JSONObject response = new ACCEPT().execute(acceptUrl, matches.get(0).toString()).get();
                     ArrayList<String> channels = PreferencesManager.getInstance(getApplicationContext()).loadChannels();
@@ -119,17 +128,23 @@ public class matches_activity extends Activity {
                 }catch (InterruptedException e) { e.printStackTrace();}
                 catch (ExecutionException e) { e.printStackTrace();}
                 catch (JSONException e) { e.printStackTrace();}
-                //matches.remove(0);
-                //matchString.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                //remove();
+                matches.remove(0);
+                System.out.println("matches ORC is size " + matches.size());
 
             }
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
+                System.out.println("ItemsInAdapter = " + itemsInAdapter);
+
                 if(itemsInAdapter == 0){
                     showAlert2();
                 }
+                else{
+                    arrayAdapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override
@@ -140,6 +155,11 @@ public class matches_activity extends Activity {
             }
         });
 
+    }
+
+    private void remove() {
+        matches.remove(0);
+        matchString.remove(0);
     }
 
 
@@ -157,7 +177,6 @@ public class matches_activity extends Activity {
         catch (JSONException e) { e.printStackTrace();}
         //matches.remove(0);
         //matchString.remove(0);
-        arrayAdapter.notifyDataSetChanged();
 
     }
 
@@ -166,10 +185,10 @@ public class matches_activity extends Activity {
         flingContainer.getTopCardListener().selectLeft();
         final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
         new REJECT().execute(rejectURL, matches.get(0).toString());
-        arrayAdapter.notifyDataSetChanged();
     }
 
     private void showAlert2() {
+
         final Context context = this;
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 
@@ -178,7 +197,11 @@ public class matches_activity extends Activity {
         alertbox.setPositiveButton("More Matches", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface arg0, int arg1) {
-                Intent intent = new Intent(context, matches_home_activity.class);
+                Intent intent = getIntent();
+
+                matches = intent.getParcelableArrayListExtra("matches");
+                matchFix(matches);
+                Intent intent2 = new Intent (context, matches_activity.class);
                 startActivity(intent);
 
             }
@@ -271,9 +294,10 @@ public class matches_activity extends Activity {
     }
 
     private void matchFix(ArrayList<Match> al) {
+
         for(int i = 0; i < al.size(); i++){
             al.get(i);
-
+//            matchString.add(al.get(i).toString());
             String eol = System.getProperty("line.separator");
             offerer = al.get(i).getOfferer().getUsername().toString();
             desirer = al.get(i).getDesirer().getUsername().toString();
@@ -284,7 +308,7 @@ public class matches_activity extends Activity {
                     " and " + desirer + eol +
                     " wants " + eol +
                     desirable);
-//            System.out.println(al.get(i));
+            System.out.println(al.get(i));
 //            System.out.println(al.get(i).getDesirable().toString());
         }
     }
