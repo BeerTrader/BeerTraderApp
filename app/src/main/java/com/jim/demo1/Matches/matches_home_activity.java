@@ -123,13 +123,10 @@ public class matches_home_activity extends Activity {
                 final JSONArray matches = obj.getJSONArray("matchList");
                 final int n = matches.length();
                 for (int i = 0; i < n; ++i) {
-                    System.out.println("i is " + i);
-
                     final JSONObject object = matches.getJSONObject(i);
                     try{
                         Match match = (Match) ObjectManager.readObjectAsString(object.toString(), Match.class);
                         matchList.add(match);
-                        System.out.println("i is " + i);
                     } catch(ObjectMappingException e) { e.printStackTrace();}
                 }
             } catch (ClientProtocolException e) {

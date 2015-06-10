@@ -86,32 +86,21 @@ public class matches_activity extends Activity {
         Intent intent = getIntent();
         matches = intent.getParcelableArrayListExtra("matches");
         matchFix(matches);
-        System.out.println("Matches Size IS " + matches.size());
         arrayAdapter = new ArrayAdapter<>(this, R.layout.matches_item, R.id.MatchOffer, matchString );
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-//            int theMatch = matches.size();
             @Override
             public void removeFirstObjectInAdapter() {
                 Log.d("LIST", "removed object!");
-//                matches.remove(0).toString();
-//                matchString.get(0);
-//                matches.get(0);
-
                 matchString.remove(0);
-
                 arrayAdapter.notifyDataSetChanged();
-
             }
 
             @Override
             public void onLeftCardExit(Object dataObject) {
                 final String rejectURL = "https://140.192.30.230:8443/beertrader/rest/match/rejectMatch";
                 new REJECT().execute(rejectURL, matches.get(0).toString());
-                System.out.println("matches in LCE is size " + matches.size());
-//                matches.remove(0);
-//                matchString.remove(0);
-                //remove();
+                matches.remove(0);
             }
 
             @Override
@@ -128,7 +117,6 @@ public class matches_activity extends Activity {
                 }catch (InterruptedException e) { e.printStackTrace();}
                 catch (ExecutionException e) { e.printStackTrace();}
                 catch (JSONException e) { e.printStackTrace();}
-                //remove();
                 matches.remove(0);
                 System.out.println("matches ORC is size " + matches.size());
 
@@ -156,12 +144,6 @@ public class matches_activity extends Activity {
         });
 
     }
-
-    private void remove() {
-        matches.remove(0);
-        matchString.remove(0);
-    }
-
 
     @OnClick(R.id.right)
     public void right() {
